@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shivani Kapoor - Resume</title>
+  <style>
+    @page { margin: 15mm 15mm; size: A4; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #1e293b;
+      margin: 0;
+      padding: 0;
+      line-height: 1.45;
+      font-size: 10.5pt;
+    }
+    .header {
+      border-bottom: 2px solid #F45B8D;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin: 0 0 4px 0;
+      font-size: 22pt;
+      color: #24151D;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .title {
+      font-size: 12pt;
+      font-weight: 700;
+      color: #E83E76;
+      margin-bottom: 6px;
+    }
+    .contact {
+      font-size: 9.5pt;
+      color: #475569;
+    }
+    .contact a {
+      color: #E83E76;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    h2 {
+      font-size: 12pt;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #24151D;
+      border-bottom: 1px solid #FBCFE8;
+      padding-bottom: 3px;
+      margin: 14px 0 8px 0;
+      font-weight: 800;
+    }
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 10.5pt;
+      color: #0f172a;
+    }
+    .item-sub {
+      display: flex;
+      justify-content: space-between;
+      font-size: 9.5pt;
+      color: #E83E76;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    ul {
+      margin: 3px 0 8px 18px;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 3px;
+      color: #334155;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      row-gap: 5px;
+      font-size: 9.5pt;
+    }
+    .skill-category {
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .skill-list {
+      color: #334155;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>SHIVANI KAPOOR</h1>
+    <div class="title">Full Stack Software Engineer</div>
+    <div class="contact">
+      Gurugram, India | 
+      <a href="mailto:shivanikapoor5588@gmail.com">shivanikapoor5588@gmail.com</a> | 
+      <a href="https://www.linkedin.com/in/shivani-kapoor-0aa99a244">LinkedIn Profile</a> | 
+      <a href="https://github.com/shivaniKapoor-Dev">github.com/shivaniKapoor-Dev</a>
+    </div>
+  </div>
+
+  <h2>Summary</h2>
+  <p style="margin: 0 0 10px 0; font-size: 9.5pt; color: #334155;">
+    Full Stack Software Engineer with production experience in high-concurrency Node.js/TypeScript backend services, MERN full-stack platforms, and GPU-accelerated React/Pixi.js (WebGL) interfaces. Skilled in building resilient web automation pipelines, secure multi-tenant architectures, and leveraging modern AI-assisted engineering workflows to design, build, and deliver scalable web solutions.
+  </p>
+
+  <h2>Technical Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-category">Languages & Core:</div>
+    <div class="skill-list">JavaScript (ES6+), TypeScript, HTML5, CSS3, Python, SQL</div>
+    <div class="skill-category">Frontend & UI:</div>
+    <div class="skill-list">React 19, Redux Toolkit, Next.js, Pixi.js (2D WebGL), Tailwind CSS, TanStack Table, Vite</div>
+    <div class="skill-category">Backend & APIs:</div>
+    <div class="skill-list">Node.js, Express.js 5, NestJS, RESTful APIs, WebSockets (Socket.io), BullMQ</div>
+    <div class="skill-category">Databases:</div>
+    <div class="skill-list">MongoDB (Mongoose), PostgreSQL (Prisma ORM), Redis, TimescaleDB</div>
+    <div class="skill-category">Security & DevOps:</div>
+    <div class="skill-list">JWT, Bcrypt, Role-Based Access Control (RBAC), Puppeteer Automation, Docker, Git, Postman</div>
+    <div class="skill-category">AI-Augmented Dev:</div>
+    <div class="skill-list">LLM APIs, Semantic Vector Search, Automated Test Scaffolding, Cursor & Copilot Workflows</div>
+  </div>
+
+  <h2>Professional Experience</h2>
+  <div>
+    <div class="item-header">
+      <span>Software Engineer (Full Stack)</span>
+      <span>2024 – Present</span>
+    </div>
+    <div class="item-sub">
+      <span>Oodles Technologies</span>
+      <span>Gurugram, India</span>
+    </div>
+    <ul>
+      <li>Architected and implemented high-throughput backend services and spatial map engines using Node.js, Prisma ORM, and PostgreSQL.</li>
+      <li>Built GPU-accelerated interactive 2D map visualization editor in React 19 and Pixi.js (WebGL), rendering 500+ nodes at a steady 60 FPS.</li>
+      <li>Implemented distributed rate-limiting and session locks with Redis, maintaining sub-80ms API response latency under concurrent traffic.</li>
+      <li>Collaborated on telemetry ingestion pipelines using TimescaleDB continuous aggregates and HashiCorp Vault field-level encryption.</li>
+    </ul>
+  </div>
+
+  <h2>Featured Projects</h2>
+  <div>
+    <div class="item-header">
+      <span>Multivendor eCommerce Platform | MERN Stack</span>
+      <span><a href="https://github.com/shivaniKapoor-Dev/multivendor-ecommerce-platform" style="color: #E83E76; text-decoration: none;">GitHub Repo</a></span>
+    </div>
+    <ul>
+      <li>Engineered a multi-tenant marketplace platform with separate customer, vendor, and administrator dashboards using Express 5 and React.</li>
+      <li>Enforced strict vendor data isolation via authorization middleware and prevented inventory overselling through atomic MongoDB transactions.</li>
+      <li>Integrated Multer for multi-file product image processing and JWT with secure HTTP-only cookies.</li>
+    </ul>
+  </div>
+
+  <div>
+    <div class="item-header">
+      <span>JobScrapper TalentFlow — Upwork Job Tracker | Node.js, Puppeteer, React</span>
+      <span><a href="https://github.com/shivaniKapoor-Dev/JobScrapper_Talent_Flow" style="color: #E83E76; text-decoration: none;">GitHub Repo</a></span>
+    </div>
+    <ul>
+      <li>Built an automated job discovery pipeline utilizing Puppeteer stealth automation, scraping client-rendered SPAs without bot detection.</li>
+      <li>Implemented high-efficiency cursor-based pagination (_id & timestamp) over tens of thousands of indexed records, eliminating O(N) skip latency.</li>
+      <li>Engineered custom start/stop cron scheduler endpoints and 24-hour rolling job recency filters.</li>
+    </ul>
+  </div>
+
+  <div>
+    <div class="item-header">
+      <span>Employee Management System (EMS) | MERN Stack</span>
+      <span><a href="https://github.com/shivaniKapoor-Dev/Employee-Management-System" style="color: #E83E76; text-decoration: none;">GitHub Repo</a></span>
+    </div>
+    <ul>
+      <li>Developed an enterprise HR management system featuring multi-tiered Role-Based Access Control (Admin vs Employee permissions).</li>
+      <li>Protected authentication vectors against brute-force credential stuffing using express-rate-limit sliding window thresholds.</li>
+      <li>Implemented schema validation with express-validator and automated onboarding credentials dispatch via Nodemailer.</li>
+    </ul>
+  </div>
+</body>
+</html>

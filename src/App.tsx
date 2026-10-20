@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { StatsBar } from './components/StatsBar';
+import { WhatIDoSection } from './components/WhatIDoSection';
+import { AiSuperpowerSection } from './components/AiSuperpowerSection';
 import { ProjectsSection } from './components/ProjectsSection';
 import { ProjectModal } from './components/ProjectModal';
 import { SkillsSection } from './components/SkillsSection';
@@ -23,6 +25,8 @@ export function App() {
       <main className="flex-1">
         <Hero />
         <StatsBar />
+        <WhatIDoSection />
+        <AiSuperpowerSection />
         <ProjectsSection onSelectProject={(p) => setActiveProjectModal(p)} />
         <SkillsSection />
         <ExperienceSection />

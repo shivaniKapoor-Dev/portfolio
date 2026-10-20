@@ -9,7 +9,8 @@ import {
   Cpu, 
   Layers, 
   ShieldCheck, 
-  ChevronDown 
+  ChevronDown,
+  Download
 } from 'lucide-react';
 
 export const Hero: React.FC = () => {
@@ -86,28 +87,38 @@ export const Hero: React.FC = () => {
           </div>
 
           {/* Action CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-3.5">
             <a
               href="#projects"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base font-extrabold text-white bg-[#F45B8D] hover:bg-[#E83E76] rounded-xl shadow-lg shadow-[#F45B8D]/25 transition-all hover:scale-102"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base font-extrabold text-white bg-[#F45B8D] hover:bg-[#E83E76] rounded-xl shadow-lg shadow-[#F45B8D]/25 transition-all hover:scale-102"
             >
               <span>Explore Technical Case Studies</span>
               <ArrowRight className="w-4 h-4 text-white" />
             </a>
 
+            {/* Direct Download Resume Button */}
+            <a
+              href="./Shivani_Kapoor_Resume.pdf"
+              download="Shivani_Kapoor_Resume.pdf"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base font-extrabold text-[#24151D] hover:text-[#F45B8D] bg-white hover:bg-[#FFE4EC] border-2 border-[#FBCFE8] hover:border-[#F45B8D] rounded-xl shadow-xs transition-all hover:scale-102"
+            >
+              <Download className="w-4 h-4 text-[#F45B8D]" />
+              <span>Download Resume (PDF)</span>
+            </a>
+
             <button
               onClick={copyEmail}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base font-bold text-[#24151D] bg-white hover:bg-[#FFE4EC] border border-[#FBCFE8] rounded-xl shadow-xs transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 text-base font-bold text-[#24151D] bg-white hover:bg-[#FFE4EC] border border-[#FBCFE8] rounded-xl shadow-xs transition-all"
             >
               {copied ? (
                 <>
                   <Check className="w-4 h-4 text-[#F45B8D]" />
-                  <span className="text-[#E83E76] font-extrabold">Email Copied to Clipboard!</span>
+                  <span className="text-[#E83E76] font-extrabold">Email Copied!</span>
                 </>
               ) : (
                 <>
                   <Copy className="w-4 h-4 text-[#F9A8C4]" />
-                  <span>Copy Direct Email</span>
+                  <span>Copy Email</span>
                 </>
               )}
             </button>
@@ -116,10 +127,10 @@ export const Hero: React.FC = () => {
               href={PERSONAL_INFO.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-base font-bold text-[#24151D] hover:text-[#F45B8D] bg-white hover:bg-[#FFE4EC] border border-[#FBCFE8] rounded-xl shadow-xs transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 text-base font-bold text-[#24151D] hover:text-[#F45B8D] bg-white hover:bg-[#FFE4EC] border border-[#FBCFE8] rounded-xl shadow-xs transition-all"
             >
               <LinkedinIcon className="w-5 h-5 text-[#F45B8D]" />
-              <span>LinkedIn Profile</span>
+              <span>LinkedIn</span>
             </a>
           </div>
 
