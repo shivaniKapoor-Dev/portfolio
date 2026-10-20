@@ -2,44 +2,52 @@
 
 @layer base {
   :root {
-    --color-primary: #4f46e5;
-    --color-primary-dark: #4338ca;
-    --color-accent: #0284c7;
+    --bg-primary: #faf8f5;
+    --text-primary: #22291f;
+    --olive-dark: #2d3a29;
+    --olive-mid: #41523c;
+    --olive-light: #eef3ec;
+    --blush-dark: #a34753;
+    --blush-mid: #df8893;
+    --blush-light: #fdf1f3;
+    --beige-dark: #6e6456;
+    --beige-mid: #e9e1d5;
+    --beige-light: #f6f1e8;
   }
 
   html {
     scroll-behavior: smooth;
   }
 
-  /* Custom smooth scrollbar */
+  /* Custom organic scrollbar */
   ::-webkit-scrollbar {
     width: 7px;
     height: 7px;
   }
   ::-webkit-scrollbar-track {
-    background: #f1f5f9;
+    background: #f6f1e8;
   }
   ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: #d8cebf;
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+    background: #b5a997;
   }
 }
 
-/* Subtle clean dot grid */
+/* Subtle warm dot grid */
 .dot-grid {
-  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-image: radial-gradient(#dfd6c8 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
-/* Elegant Soft Glassmorphism */
+/* Warm Editorial Glassmorphism */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(226, 232, 240, 0.9);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(232, 224, 212, 0.9);
 }
 
 .glass-panel-hover {
@@ -47,38 +55,25 @@
 }
 .glass-panel-hover:hover {
   background: #ffffff;
-  border-color: rgba(99, 102, 241, 0.35);
+  border-color: rgba(65, 82, 60, 0.4);
   transform: translateY(-3px);
-  box-shadow: 0 16px 36px -12px rgba(99, 102, 241, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 16px 36px -12px rgba(45, 58, 41, 0.08), 0 4px 12px -2px rgba(163, 71, 83, 0.04);
 }
 
-/* Clean Elegant Gradients */
-.gradient-text {
-  background: linear-gradient(135deg, #1e293b 0%, #4338ca 50%, #4f46e5 100%);
+/* Trending Olive & Blush Gradients */
+.gradient-headline {
+  background: linear-gradient(135deg, #1f271c 0%, #2d3a29 55%, #853744 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.gradient-accent {
-  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #06b6d4 100%);
+.gradient-rose-olive {
+  background: linear-gradient(135deg, #2d3a29 0%, #687961 45%, #b35664 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.subtle-badge {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  color: #334155;
-}
-
-/* Clean soft shadows */
-.soft-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
-}
-
-.soft-card:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.02);
+/* Soft Ambient Glows */
+.ambient-glow {
+  background: radial-gradient(circle, rgba(253, 241, 243, 0.8) 0%, rgba(238, 243, 236, 0.7) 40%, transparent 70%);
 }

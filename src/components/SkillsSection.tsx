@@ -12,38 +12,38 @@ import {
 export const SkillsSection: React.FC = () => {
   const getCategoryIcon = (iconName: string) => {
     switch (iconName) {
-      case 'Server': return <Server className="w-5 h-5 text-indigo-600" />;
-      case 'Layout': return <Layout className="w-5 h-5 text-sky-600" />;
-      case 'Database': return <Database className="w-5 h-5 text-teal-600" />;
-      case 'ShieldCheck': return <ShieldCheck className="w-5 h-5 text-purple-600" />;
-      default: return <Cpu className="w-5 h-5 text-indigo-600" />;
+      case 'Server': return <Server className="w-5 h-5 text-[#344b2f]" />;
+      case 'Layout': return <Layout className="w-5 h-5 text-[#a34753]" />;
+      case 'Database': return <Database className="w-5 h-5 text-[#3b5336]" />;
+      case 'ShieldCheck': return <ShieldCheck className="w-5 h-5 text-[#6d5b4a]" />;
+      default: return <Cpu className="w-5 h-5 text-[#344b2f]" />;
     }
   };
 
   const getIconBg = (iconName: string) => {
     switch (iconName) {
-      case 'Server': return 'bg-indigo-50 border-indigo-100';
-      case 'Layout': return 'bg-sky-50 border-sky-100';
-      case 'Database': return 'bg-teal-50 border-teal-100';
-      case 'ShieldCheck': return 'bg-purple-50 border-purple-100';
-      default: return 'bg-slate-50 border-slate-200';
+      case 'Server': return 'bg-[#edf4eb] border-[#d3e3cf]';
+      case 'Layout': return 'bg-[#fdf0f2] border-[#f8d4da]';
+      case 'Database': return 'bg-[#edf4eb] border-[#d3e3cf]';
+      case 'ShieldCheck': return 'bg-[#f5efe6] border-[#e7ded2]';
+      default: return 'bg-[#f5efe6] border-[#e7ded2]';
     }
   };
 
   return (
-    <section id="skills" className="py-24 bg-slate-50/60 relative border-t border-slate-200/80">
+    <section id="skills" className="py-24 bg-[#f5efe6]/50 relative border-t border-[#e8ded2]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-semibold mb-3">
-            <Terminal className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#edf4eb] border border-[#d3e3cf] text-[#2f462a] text-xs font-semibold mb-3">
+            <Terminal className="w-3.5 h-3.5 text-[#344b2f]" />
             <span>Technical Proficiency & Tooling</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1f271c] tracking-tight">
             Production-Tested Technical Skills
           </h2>
-          <p className="text-slate-600 text-base sm:text-lg mt-3">
+          <p className="text-[#555f50] text-base sm:text-lg mt-3">
             Categorized by practical application in production systems, performance tuning, and architectural robustness.
           </p>
         </div>
@@ -53,13 +53,13 @@ export const SkillsSection: React.FC = () => {
           {SKILL_CATEGORIES.map((category) => (
             <div 
               key={category.title}
-              className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/90 shadow-xs hover:border-slate-300 transition-all"
+              className="bg-white rounded-2xl p-6 sm:p-8 border border-[#e5dcd0] shadow-xs hover:border-[#b8c9b3] transition-all"
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className={`p-2.5 rounded-xl border ${getIconBg(category.iconName)}`}>
                   {getCategoryIcon(category.iconName)}
                 </div>
-                <h3 className="text-lg sm:text-xl font-bold text-slate-900">
+                <h3 className="text-lg sm:text-xl font-bold text-[#1f271c]">
                   {category.title}
                 </h3>
               </div>
@@ -68,21 +68,21 @@ export const SkillsSection: React.FC = () => {
                 {category.skills.map((skill) => (
                   <div 
                     key={skill.name}
-                    className="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/80 hover:border-indigo-200 transition-colors"
+                    className="p-3.5 rounded-xl bg-[#faf7f2] border border-[#e8e0d4] hover:border-[#b8c9b3] transition-colors"
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <span className="font-semibold text-sm text-slate-900">
+                      <span className="font-semibold text-sm text-[#1f271c]">
                         {skill.name}
                       </span>
                       <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                         skill.level === 'Advanced' 
-                          ? 'bg-indigo-50 text-indigo-700 border border-indigo-200/80' 
-                          : 'bg-slate-100 text-slate-600 border border-slate-200'
+                          ? 'bg-[#edf4eb] text-[#2d4428] border border-[#d2e2ce]' 
+                          : 'bg-[#f4eee5] text-[#554d42] border border-[#e6ded2]'
                       }`}>
                         {skill.level}
                       </span>
                     </div>
-                    <p className="text-xs text-slate-600 leading-relaxed">
+                    <p className="text-xs text-[#565f52] leading-relaxed">
                       {skill.context}
                     </p>
                   </div>
