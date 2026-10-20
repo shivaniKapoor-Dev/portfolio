@@ -108,8 +108,8 @@ export const ContactSection: React.FC = () => {
                       <LinkedinIcon className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="text-sm font-bold text-[#24151D]">LinkedIn</div>
-                      <div className="text-xs text-[#6B5561] font-medium">shivani-kapoor</div>
+                      <div className="text-sm font-bold text-[#24151D]">LinkedIn Profile</div>
+                      <div className="text-xs text-[#6B5561] font-medium">shivani-kapoor-0aa99a244</div>
                     </div>
                   </div>
                   <ArrowRight className="w-4 h-4 text-[#F9A8C4] group-hover:text-[#F45B8D] group-hover:translate-x-1 transition-all" />

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PERSONAL_INFO } from '../data/portfolioData';
+import { LinkedinIcon } from './Icons';
 import { 
   ArrowRight, 
   Copy, 
@@ -7,9 +8,8 @@ import {
   Server, 
   Cpu, 
   Layers, 
-  ShieldCheck,
-  ChevronDown,
-  Sparkles
+  ShieldCheck, 
+  ChevronDown 
 } from 'lucide-react';
 
 export const Hero: React.FC = () => {
@@ -116,8 +116,9 @@ export const Hero: React.FC = () => {
               href={PERSONAL_INFO.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base font-bold text-[#6B5561] hover:text-[#F45B8D] bg-white hover:bg-[#FFE4EC] border border-[#FBCFE8] rounded-xl shadow-xs transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-base font-bold text-[#24151D] hover:text-[#F45B8D] bg-white hover:bg-[#FFE4EC] border border-[#FBCFE8] rounded-xl shadow-xs transition-all"
             >
+              <LinkedinIcon className="w-5 h-5 text-[#F45B8D]" />
               <span>LinkedIn Profile</span>
             </a>
           </div>

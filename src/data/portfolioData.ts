@@ -3,8 +3,8 @@ import { ProjectCaseStudy, ExperienceItem, SkillCategory } from '../types';
 export const PERSONAL_INFO = {
   name: 'Shivani Kapoor',
   title: 'Full Stack Software Engineer',
-  tagline: 'Building High-Concurrency Backend Engines & High-Performance Interactive Web Apps',
-  bio: 'Full Stack Software Engineer with deep hands-on expertise building production systems with Node.js, TypeScript, React, PostgreSQL, Redis, and WebGL. Experienced in architecting distributed backend services, real-time WebSockets, time-series telemetry pipelines, and interactive canvas-based web applications.',
+  tagline: 'Building High-Concurrency Backend Engines, Scalable MERN Platforms & Interactive Web Apps',
+  bio: 'Full Stack Software Engineer with deep hands-on expertise building production systems with Node.js, TypeScript, React, MongoDB, PostgreSQL, Redis, and WebGL. Experienced in architecting distributed backend services, multivendor e-commerce engines, web automation pipelines, and high-performance frontend interfaces.',
   email: 'shivanikapoor5588@gmail.com',
   workEmail: 'shivani.kapoor@oodles.io',
   location: 'Gurugram, India',
@@ -15,113 +15,288 @@ export const PERSONAL_INFO = {
 };
 
 export const HIGHLIGHT_STATS = [
-  { label: 'Production Projects Delivered', value: '4+', detail: 'Enterprise & gaming web apps' },
-  { label: 'API Response Latency', value: '<80ms', detail: 'Optimized with Redis caching' },
+  { label: 'Public Repositories', value: '4+', detail: 'Full-stack MERN & distributed systems' },
+  { label: 'API Response Latency', value: '<80ms', detail: 'Optimized queries & indexing' },
+  { label: 'Automated Job Ingestion', value: '10k+', detail: 'Headless browser & cron pipelines' },
   { label: 'Interactive Canvas Rendering', value: '60 FPS', detail: 'WebGL & Pixi.js acceleration' },
-  { label: 'Automated Job Ingestion', value: '10k+', detail: 'Telemetry & real-time scrapers' },
 ];
 
 export const PROJECTS: ProjectCaseStudy[] = [
   {
-    id: 'safari-word-hunt-backend',
-    title: 'Safari World Hunt — Distributed Game Backend & Simulation Engine',
-    subtitle: 'High-throughput Node.js/TypeScript backend powering real-time multiplayer map exploration and simulation rules.',
-    category: 'backend',
+    id: 'multivendor-ecommerce-platform',
+    title: 'Multivendor eCommerce Platform',
+    subtitle: 'Full-stack MERN multivendor platform with vendor dashboards, product catalogs, cart, orders, and secure authentication.',
+    category: 'fullstack',
     featured: true,
-    role: 'Backend Architect & Core Engineer',
+    role: 'Full Stack Developer',
     timeline: '2024 - Present',
-    githubUrl: 'https://github.com/shivaniKapoor-Dev',
-    summary: 'Architected and built the complete backend infrastructure for a high-concurrency game platform featuring procedural map generation, versioned live environments, Redis rate-limiting, and automated map simulation verification.',
-    problemStatement: 'The game required instant letter-path validation, synchronized multi-ecosystem assets, and strict map generation integrity while maintaining sub-100ms latency under high player concurrency.',
-    architectureOverview: 'Event-driven Express 5 architecture built with TypeScript, Prisma ORM, PostgreSQL connection pools, BullMQ distributed background queues, and Redis for rate-limiting and session caching. Integrated AWS S3 for secure asset streaming and Pino for structured logging.',
+    githubUrl: 'https://github.com/shivaniKapoor-Dev/multivendor-ecommerce-platform',
+    summary: 'Architected and built a multi-tenant multivendor marketplace allowing independent vendors to manage inventories, process customer orders, and track revenue while providing customers a unified shopping experience with stateful cart synchronization.',
+    problemStatement: 'Handling multi-vendor product catalogs with separate vendor permissions, real-time inventory adjustments, and secure role-based multi-user authentication without data leakage across vendors.',
+    architectureOverview: 'Full-stack MERN architecture built with Express 5, Node.js, MongoDB (Mongoose 9), and React. Implemented JWT authentication with secure HTTP-only cookies, Multer multi-image uploads, bcrypt password hashing, and atomic MongoDB transactions for order processing.',
     codeSnippetPreview: {
-      filename: 'simulation-engine.ts',
-      language: 'typescript',
-      code: `// Deterministic path verification & rate-limited map engine
-export async function validateConnectedPath(
-  mapId: string, 
-  userPath: Coordinate[], 
-  sessionToken: string
-): Promise<ValidationResult> {
-  // Check Redis distributed lock to prevent double-claim race conditions
-  const lock = await redisClient.set(\`lock:session:\${sessionToken}\`, "1", "NX", "EX", 5);
-  if (!lock) throw new RateLimitException("Concurrent request rejected");
+      filename: 'orderController.js',
+      language: 'javascript',
+      code: `// Atomic order creation & multi-vendor inventory decrement
+export const createOrder = async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
+  try {
+    const { items, shippingAddress, paymentInfo } = req.body;
+    
+    // Decrement stock atomically per vendor item
+    for (const item of items) {
+      const product = await Product.findOneAndUpdate(
+        { _id: item.productId, stock: { $gte: item.quantity } },
+        { $inc: { stock: -item.quantity } },
+        { session, new: true }
+      );
+      if (!product) throw new Error(\`Insufficient stock for \${item.name}\`);
+    }
 
-  const liveMap = await prisma.mapVersion.findUnique({
-    where: { id: mapId, status: "LIVE" },
-    include: { nodes: true, challenges: true }
-  });
+    const order = await Order.create([{
+      user: req.user._id,
+      items,
+      shippingAddress,
+      paymentInfo,
+      status: 'Processing'
+    }], { session });
 
-  return runPathSimulation(liveMap, userPath);
-}`
+    await session.commitTransaction();
+    res.status(201).json({ success: true, order: order[0] });
+  } catch (error) {
+    await session.abortTransaction();
+    res.status(400).json({ success: false, message: error.message });
+  } finally {
+    session.endSession();
+  }
+};`
     },
     techStack: [
-      { name: 'Node.js & TypeScript', category: 'backend', why: 'Provides type safety across domain models and high I/O throughput.' },
-      { name: 'PostgreSQL & Prisma ORM', category: 'database', why: 'Strict relational integrity for map node graphs and versioned releases.' },
-      { name: 'Redis & BullMQ', category: 'backend', why: 'Offloaded heavy map layout calculations and enforced distributed rate limits.' },
-      { name: 'Socket.io', category: 'backend', why: 'Real-time two-way synchronization of player progression and live game state.' },
-      { name: 'AWS S3', category: 'devops', why: 'Scalable cloud storage for dynamic ecosystem audio and visual assets.' },
-      { name: 'Zod & Helmet', category: 'backend', why: 'Runtime payload schema validation and enterprise-grade HTTP security headers.' }
+      { name: 'Node.js & Express 5', category: 'backend', why: 'High-throughput RESTful routing and clean modular controller architecture.' },
+      { name: 'MongoDB & Mongoose 9', category: 'database', why: 'Document model for dynamic product schemas, variant attributes, and atomic transactions.' },
+      { name: 'React & Redux', category: 'frontend', why: 'State management for global shopping cart, user session, and vendor analytics.' },
+      { name: 'JWT & Cookies', category: 'architecture', why: 'Stateless role-based authentication separating customers, vendors, and admins.' },
+      { name: 'Multer', category: 'backend', why: 'Streamlined multi-file image uploads for product galleries and vendor banners.' },
+      { name: 'Tailwind CSS', category: 'frontend', why: 'Responsive vendor control panels and high-conversion shopping storefronts.' }
     ],
     keyChallenges: [
       {
-        title: 'Preventing Race Conditions on Live Game Sessions',
-        problem: 'Simultaneous path-completion submissions from the client caused duplicate scoring and inconsistencies in map progression.',
-        solution: 'Implemented atomic distributed locks using Redis (NX/EX flags) combined with PostgreSQL transaction isolation levels.',
-        engineeringTakeaway: 'Always treat incoming high-frequency game events as idempotent transactions.'
+        title: 'Preventing Inventory Overselling During Concurrent Checkouts',
+        problem: 'Simultaneous purchase requests for the last available item led to negative inventory levels.',
+        solution: 'Implemented atomic MongoDB queries with condition checks ({ stock: { $gte: qty } }) within multi-document transaction sessions.',
+        engineeringTakeaway: 'Always validate stock availability atomically at the database write layer rather than relying on application read cache.'
       },
       {
-        title: 'Map Layout Simulation & Zero-Downtime Releases',
-        problem: 'Publishing updated game maps risked breaking ongoing player sessions if layout coordinates differed.',
-        solution: 'Created an immutable versioning system (Draft -> Simulation Test -> LIVE -> Legacy Published Sync) with automated CI map simulation test suites.',
-        engineeringTakeaway: 'Decoupling active runtime state from published schema versions guarantees zero downtime.'
+        title: 'Multi-Tenant Vendor Isolation & Security',
+        problem: 'Vendors must only view and mutate their own products and order sub-items without accessing other vendors data.',
+        solution: 'Engineered authorization middleware that enforces vendor ID scoping on every database query and mutator route.',
+        engineeringTakeaway: 'Strict middleware-level tenant validation prevents unauthorized privilege escalation.'
       }
     ],
     metrics: [
-      { label: 'API Response Time', value: '<75ms', description: 'Average response time across game endpoints' },
-      { label: 'Test Suite Reliability', value: '100%', description: 'Comprehensive map simulation test coverage' },
-      { label: 'Concurrent Operations', value: '5,000+', description: 'Stress-tested with zero deadlocks' }
+      { label: 'Role Segregation', value: '100% Isolated', description: 'Strict customer vs vendor vs admin RBAC' },
+      { label: 'Checkout Reliability', value: 'Zero Over-orders', description: 'Enforced via atomic database transactions' },
+      { label: 'Image Upload Latency', value: '<250ms', description: 'Optimized with Multer streaming pipeline' }
     ],
     keyTakeaways: [
-      'Designed end-to-end RESTful APIs with Swagger/OpenAPI documentation',
-      'Configured BullMQ workers for background data seeding and layout compilation',
-      'Enforced single-live-map safety constraints at the database level'
+      'Engineered complete vendor onboarding and product lifecycle management',
+      'Implemented robust form validation using express-validator and sanitized inputs',
+      'Built responsive checkout workflows with stateful cart persistence'
     ],
     interviewQnA: [
       {
-        question: 'Why did you choose PostgreSQL with Prisma instead of a NoSQL database for the game map?',
-        answer: 'Game maps are relational graphs: themes own maps, maps have versions, and versions contain interconnected letter nodes with spatial coordinates. Prisma provided strict type safety between backend TypeScript and database schemas, while PostgreSQL transactions ensured map versions could be published atomically without orphaned nodes.'
+        question: 'How do you handle order fulfillment when a customer buys products from multiple vendors in a single cart?',
+        answer: 'I model the checkout with a parent Order containing an array of vendor sub-orders. Each vendor sub-order possesses its own shipping status and payout ledger. When an order is placed, an atomic transaction decrements inventory across all vendor products and notifies each vendor individually via background events.'
       },
       {
-        question: 'How do you handle heavy background tasks like map generation without blocking user requests?',
-        answer: 'I separated map generation from request-response cycles using BullMQ and Redis. When an admin requests a new procedural map, the API returns a job ID immediately. A worker process computes layout matrices and seeds the database asynchronously, alerting the client via WebSockets upon completion.'
+        question: 'Why did you choose MongoDB over a relational database for this eCommerce platform?',
+        answer: 'Products across diverse categories feature irregular attribute schemas (e.g. clothing has size/color variants, whereas electronics have wattage and tech specs). MongoDB flexible document structure allows storing variable attributes and embedded image galleries without costly database schema migrations.'
       }
     ]
   },
   {
-    id: 'safari-admin-studio',
-    title: 'Safari Studio — WebGL & Canvas Interactive Map Admin Panel',
-    subtitle: 'Next-gen admin control platform built with React 19, Pixi.js 2D WebGL canvas, and interactive node workflow graphs.',
-    category: 'frontend',
+    id: 'jobscrapper-talent-flow',
+    title: 'JobScrapper TalentFlow — Upwork Job Tracker & Automation Engine',
+    subtitle: 'Full-stack Upwork Job Tracker built with React, Node.js, Express, MongoDB, and Puppeteer with cursor pagination and automated cron controls.',
+    category: 'ai-automation',
     featured: true,
-    role: 'Lead Frontend Developer',
+    role: 'Full Stack & Automation Developer',
+    timeline: '2024 - Present',
+    githubUrl: 'https://github.com/shivaniKapoor-Dev/JobScrapper_Talent_Flow',
+    summary: 'Engineered an automated job tracking pipeline that scrapes, indexes, and filters Upwork freelance postings in real time. Features automated 24-hour recency filters, cursor-based pagination for high-volume jobs, and start/stop cron scheduler controls.',
+    problemStatement: 'Freelancers spend hours manually refreshing job boards. Standard scrapers trigger CAPTCHAs, and high-frequency scraping overwhelms database memory without cursor-based pagination.',
+    architectureOverview: 'Full-stack automation architecture consisting of an Express 5 backend with Puppeteer for stealth headless scraping, paired with a React frontend for filtering and live tracking. Uses MongoDB for structured job card indexing and Winston for production observability.',
+    codeSnippetPreview: {
+      filename: 'scraperCronService.js',
+      language: 'javascript',
+      code: `// Resilient scraping scheduler with cursor pagination & recency filters
+export class JobScraperService {
+  static async runHourlySync() {
+    const browser = await puppeteer.launch({ 
+      headless: 'new',
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-blink-features=AutomationControlled'] 
+    });
+    
+    try {
+      const page = await browser.newPage();
+      await page.setUserAgent(getRandomUserAgent());
+      
+      const rawJobs = await this.scrapeRecentPostings(page, { maxAgeHours: 24 });
+      
+      // Upsert to MongoDB with cursor index to eliminate duplicates
+      const bulkOps = rawJobs.map(job => ({
+        updateOne: {
+          filter: { externalJobId: job.externalJobId },
+          update: { $set: job },
+          upsert: true
+        }
+      }));
+      
+      await JobModel.bulkWrite(bulkOps);
+      logger.info(\`Successfully synced \${rawJobs.length} jobs.\`);
+    } finally {
+      await browser.close();
+    }
+  }
+}`
+    },
+    techStack: [
+      { name: 'Node.js & Express 5', category: 'backend', why: 'Asynchronous event loop for managing non-blocking browser scraper pipelines.' },
+      { name: 'Puppeteer', category: 'architecture', why: 'Headless Chrome automation for extracting client-rendered SPA job feeds.' },
+      { name: 'MongoDB & Mongoose', category: 'database', why: 'Cursor-based indexed pagination and bulk upsert operations for high-volume jobs.' },
+      { name: 'React & Tailwind CSS', category: 'frontend', why: 'Real-time job dashboard with instant search, 24-hour filters, and scheduler controls.' },
+      { name: 'Winston Logger', category: 'backend', why: 'Structured logging and failure alert telemetry across background cron executions.' }
+    ],
+    keyChallenges: [
+      {
+        title: 'Bypassing Headless Detection & Rate Limits',
+        problem: 'Upwork dynamic pages detected automated headless instances, throwing CAPTCHA verification screens.',
+        solution: 'Masked navigator.webdriver properties, randomized human-like scrolling intervals, and rotated user agents dynamically.',
+        engineeringTakeaway: 'Reliable scrapers require stealth fingerprint spoofing and stochastic execution delays.'
+      },
+      {
+        title: 'Cursor-Based Pagination for High-Volume Listings',
+        problem: 'Offset-based pagination (skip/limit) caused severe performance degradation as indexed jobs reached tens of thousands.',
+        solution: 'Migrated pagination to cursor-based queries using the indexed _id and postedAt timestamp.',
+        engineeringTakeaway: 'Cursor-based pagination maintains O(1) query performance regardless of dataset depth.'
+      }
+    ],
+    metrics: [
+      { label: 'Job Listings Indexed', value: '15,000+', description: 'Clean structured postings captured' },
+      { label: 'Pagination Speedup', value: '8x Faster', description: 'Via MongoDB cursor-based indexing' },
+      { label: 'Manual Time Saved', value: '12+ hrs/wk', description: 'Automated 24/7 background job discovery' }
+    ],
+    keyTakeaways: [
+      'Built custom start/pause/resume cron scheduler controls via API endpoints',
+      'Configured 24-hour rolling job recency filters to prioritize fresh opportunities',
+      'Implemented bulkWrite upsert pipelines to prevent duplicate records'
+    ],
+    interviewQnA: [
+      {
+        question: 'Why did you use cursor-based pagination instead of standard offset pagination?',
+        answer: 'With traditional skip and limit, the database must scan through all previous skipped rows before returning results, degrading from O(1) to O(N). Cursor pagination uses a deterministic index comparison (e.g. _id < lastSeenId), allowing the database to jump directly to the target record via B-tree index in constant time.'
+      },
+      {
+        question: 'How do you ensure scraper failures dont crash the backend application?',
+        answer: 'I isolated scraping jobs in isolated asynchronous worker wrappers with comprehensive try/catch/finally blocks ensuring browser.close() is always invoked to prevent memory leaks. Failures are captured by Winston logger without interrupting the primary Express server.'
+      }
+    ]
+  },
+  {
+    id: 'employee-management-system',
+    title: 'Employee Management System (EMS)',
+    subtitle: 'A full-stack Employee Management System built using the MERN stack with role-based authentication, department management, and rate limiting.',
+    category: 'fullstack',
+    featured: true,
+    role: 'Full Stack Developer',
+    timeline: '2024 - Present',
+    githubUrl: 'https://github.com/shivaniKapoor-Dev/Employee-Management-System',
+    summary: 'Built an enterprise internal management system featuring multi-tiered Role-Based Access Control (Admin vs Employee), employee record CRUD, department restructuring, attendance monitoring, and API security rate limiting.',
+    problemStatement: 'Organizations need centralized employee records with strict data privacy so employees can view only their personal profile and salary records, while managers can manage departments without authorization loopholes.',
+    architectureOverview: 'Full-stack MERN platform built with Express 5, MongoDB, Node.js, and React. Secured with JWT tokens, express-rate-limit to mitigate brute-force attacks, express-validator for robust DTO payload inspection, and Nodemailer for automated employee onboarding emails.',
+    codeSnippetPreview: {
+      filename: 'authMiddleware.js',
+      language: 'javascript',
+      code: `// Multi-tier Role-Based Access Control (RBAC) middleware
+export const authorizeRoles = (...allowedRoles) => {
+  return (req, res, next) => {
+    if (!req.user || !allowedRoles.includes(req.user.role)) {
+      return res.status(403).json({
+        success: false,
+        message: \`Role (\${req.user?.role || 'Guest'}) is not authorized to access this resource\`
+      });
+    }
+    next();
+  };
+};`
+    },
+    techStack: [
+      { name: 'Node.js & Express 5', category: 'backend', why: 'Fast asynchronous request pipeline and layered middleware authorization.' },
+      { name: 'MongoDB & Mongoose 9', category: 'database', why: 'Referenced relational schema modeling between employees, departments, and payroll.' },
+      { name: 'React', category: 'frontend', why: 'Interactive admin tables, employee profiles, and department hierarchy views.' },
+      { name: 'JWT & BcryptJS', category: 'architecture', why: 'Cryptographic token generation and salted password hashing.' },
+      { name: 'express-rate-limit', category: 'backend', why: 'Guards authentication endpoints against credential-stuffing and DDoS spikes.' },
+      { name: 'express-validator', category: 'backend', why: 'Validates and sanitizes all incoming DTO requests prior to database operations.' }
+    ],
+    keyChallenges: [
+      {
+        title: 'Cascading Updates Upon Department Deletion',
+        problem: 'Deleting or renaming a department left orphaned employee foreign keys across the database.',
+        solution: 'Implemented Mongoose pre-remove middleware hooks that reassign employees to an unassigned holding pool or block deletion if active members exist.',
+        engineeringTakeaway: 'Always enforce referential integrity rules at the application schema layer when using document stores.'
+      },
+      {
+        title: 'Preventing Brute-Force Authentication Attacks',
+        problem: 'Public login routes were susceptible to high-frequency password-guessing scripts.',
+        solution: 'Configured express-rate-limit with sliding window thresholds (max 5 failed attempts per 15 minutes per IP).',
+        engineeringTakeaway: 'Rate limiting is a foundational security requirement for public authentication vectors.'
+      }
+    ],
+    metrics: [
+      { label: 'Security Enforcement', value: 'RBAC Strict', description: 'Zero unauthorized horizontal privilege access' },
+      { label: 'Brute-Force Guard', value: '5 req/15min', description: 'Rate-limited authentication protection' },
+      { label: 'Input Validation', value: '100% Sanitized', description: 'Validated with express-validator schemas' }
+    ],
+    keyTakeaways: [
+      'Engineered complete departmental hierarchy and organizational chart models',
+      'Configured automated email credentials dispatch on new employee creation via Nodemailer',
+      'Implemented clean modal dialogs and responsive data tables in React'
+    ],
+    interviewQnA: [
+      {
+        question: 'How do you prevent horizontal privilege escalation in the Employee Management System?',
+        answer: 'Horizontal privilege escalation occurs when an employee accesses another employees record by altering the ID in the URL. I verify in the controller that the requested employee ID matches the authenticated user ID in the verified JWT payload, unless the requesting user possesses the Admin role.'
+      },
+      {
+        question: 'How do you handle password storage and authentication securely?',
+        answer: 'Passwords are never stored in plaintext. They are salted and hashed using bcryptjs with a cost factor of 10 prior to persistence. Upon login, bcrypt.compare verifies the hash. On successful validation, a signed JWT token is issued with a short expiration TTL.'
+      }
+    ]
+  },
+  {
+    id: 'safari-world-hunt-studio',
+    title: 'Safari World Hunt — Distributed Game Engine & WebGL Admin Studio',
+    subtitle: 'High-throughput gaming backend and 60 FPS WebGL 2D canvas editor built with Node.js, TypeScript, PostgreSQL, Prisma, Redis, and React 19 + Pixi.js.',
+    category: 'frontend',
+    featured: false,
+    role: 'Core Software Engineer (Oodles)',
     timeline: '2024 - Present',
     liveUrl: 'https://admin-panel-frontend-nine-wine.vercel.app',
-    githubUrl: 'https://github.com/shivaniKapoor-Dev',
-    summary: 'Engineered a high-performance visual editor allowing game designers to inspect, manipulate, and publish hundreds of interconnected game nodes in real time on a 60 FPS 2D WebGL canvas.',
-    problemStatement: 'Standard DOM rendering struggled when visualizing complex map graphs with hundreds of animated letter nodes, resulting in UI freezes and dropped frames during panning and zooming.',
-    architectureOverview: 'Built with React 19 and Vite for instant build cycles. Integrated Pixi.js for WebGL GPU-accelerated rendering of the map grid, alongside @xyflow/react for node logic workflows. Managed global selection state and version comparisons via Redux Toolkit and TanStack Table.',
+    githubUrl: 'https://github.com/shivaniKapoor-Dev/portfolio',
+    summary: 'Engineered an enterprise gaming backend and visual canvas editor for procedural maps. Features Redis distributed locks, versioned live releases, and GPU-accelerated Pixi.js 2D rendering for inspecting hundreds of interconnected game nodes at a steady 60 FPS.',
+    problemStatement: 'Visualizing and manipulating 500+ interconnected spatial nodes in standard DOM caused severe frame drops and lagging click selection.',
+    architectureOverview: 'Full-stack platform built with Node.js, TypeScript, Prisma, PostgreSQL, and Redis on the backend; paired with React 19, Pixi.js WebGL rendering, @xyflow/react, and Redux Toolkit on the frontend. Deployed live on Vercel.',
     codeSnippetPreview: {
       filename: 'MapCanvasViewport.tsx',
       language: 'typescript',
-      code: `// High-performance Pixi.js WebGL viewport with instantaneous hit-testing
+      code: `// High-performance Pixi.js WebGL viewport rendering 500+ interactive nodes
 export const MapCanvasViewport = ({ mapNodes, onSelectNode }: ViewportProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const pixiApp = usePixiRenderer(containerRef);
 
   useEffect(() => {
     if (!pixiApp) return;
-    // Batch render nodes directly on GPU stage
     const stage = pixiApp.stage;
     stage.removeChildren();
 
@@ -135,186 +310,34 @@ export const MapCanvasViewport = ({ mapNodes, onSelectNode }: ViewportProps) => 
 };`
     },
     techStack: [
-      { name: 'React 19 & Vite', category: 'frontend', why: 'State-of-the-art reactivity, sub-second HMR, and optimal bundle size.' },
-      { name: 'Pixi.js (WebGL)', category: 'frontend', why: 'GPU-accelerated 2D rendering for hundreds of interactive nodes at a solid 60 FPS.' },
-      { name: '@xyflow/react', category: 'frontend', why: 'Extensible node-based visual workflow editor for path connections.' },
-      { name: 'Redux Toolkit', category: 'frontend', why: 'Predictable state management for complex editor undo/redo and node selections.' },
-      { name: 'TanStack Table v8', category: 'frontend', why: 'Headless, virtualization-ready table for filtering thousands of game assets.' },
-      { name: 'Tailwind CSS', category: 'frontend', why: 'Modern utility-first styling with dark mode and crisp glassmorphic aesthetics.' }
+      { name: 'React 19 & Vite', category: 'frontend', why: 'Blazingly fast HMR and optimized component lifecycle.' },
+      { name: 'Pixi.js (WebGL)', category: 'frontend', why: 'GPU batch rendering for hundreds of interactive nodes at 60 FPS.' },
+      { name: 'Node.js & TypeScript', category: 'backend', why: 'Type-safe domain logic and high I/O throughput.' },
+      { name: 'PostgreSQL & Prisma', category: 'database', why: 'Relational map versions, spatial coordinates, and transactional rollouts.' },
+      { name: 'Redis', category: 'backend', why: 'Distributed locks to eliminate session race conditions.' }
     ],
     keyChallenges: [
       {
-        title: 'DOM Bottlenecks When Rendering Large Graphs',
-        problem: 'Rendering 500+ DOM elements with SVGs caused UI stuttering and frame drops below 20 FPS during pan/zoom.',
-        solution: 'Migrated the map canvas layer to Pixi.js WebGL rendering, keeping only metadata panels and control sidebars in standard React DOM.',
-        engineeringTakeaway: 'Offload high-volume visual objects to GPU canvases while keeping state synchronized with React.'
-      },
-      {
-        title: 'Instant Node Selection with Complex Reactive State',
-        problem: 'Clicking a node triggered full-tree re-renders, causing noticeable click latency.',
-        solution: 'Optimized Redux state with memoized Reselect selectors and decoupled the hover/selection interaction loop from high-level state.',
-        engineeringTakeaway: 'Granular selector subscriptions prevent unnecessary component re-evaluations.'
+        title: 'DOM Bottlenecks When Rendering Large Spatial Graphs',
+        problem: 'Rendering hundreds of interactive SVG nodes caused frame rates to drop below 20 FPS during pan/zoom.',
+        solution: 'Migrated map canvas to Pixi.js WebGL, rendering nodes directly on the GPU.',
+        engineeringTakeaway: 'Offload high-volume visual graphics to GPU canvases while keeping metadata in React state.'
       }
     ],
     metrics: [
-      { label: 'Canvas Frame Rate', value: '60 FPS', description: 'Smooth GPU-accelerated panning and zooming' },
-      { label: 'Node Selection Latency', value: '<16ms', description: 'Instantaneous UI feedback on node clicks' },
-      { label: 'Bundle Efficiency', value: '45% smaller', description: 'Optimized tree-shaking and dynamic code-splitting' }
+      { label: 'Canvas Rendering', value: '60 FPS', description: 'Smooth GPU-accelerated map exploration' },
+      { label: 'API Latency', value: '<75ms', description: 'Cached with Redis key-value store' },
+      { label: 'Live Deployed', value: 'Vercel Preview', description: 'Production-ready admin dashboard' }
     ],
     keyTakeaways: [
-      'Deployed live production builds to Vercel with automated preview pipelines',
-      'Implemented full role-based access control (RBAC) for designers and admins',
-      'Engineered interactive path simulators to preview game rules before publishing'
+      'Live deployed on Vercel with automated continuous preview builds',
+      'Configured role-based admin controls and live theme switching',
+      'Eliminated game state race conditions via Redis atomic locks'
     ],
     interviewQnA: [
       {
-        question: 'Why did you use Pixi.js instead of standard SVG or Canvas 2D context?',
-        answer: 'Standard SVG introduces heavy DOM nodes that drag down the browser layout engine as element count scales. HTML5 Canvas 2D works on the CPU. Pixi.js leverages WebGL to batch-draw sprites directly on the GPU, allowing smooth 60 FPS pan/zoom interactions and custom shader effects without frame drops.'
-      },
-      {
-        question: 'How do you keep Pixi.js synchronized with React state?',
-        answer: 'I wrap the Pixi viewport in a custom React hook that manages the Pixi Application lifecycle. React props supply the immutable map data; whenever props change, the hook updates the WebGL display list incrementally while firing React callback dispatches on user click events.'
-      }
-    ]
-  },
-  {
-    id: 'aqua-advisor-telemetry',
-    title: 'AquaAdvisor — Industrial IoT Telemetry & Security Platform',
-    subtitle: 'Enterprise telemetry management platform with TimescaleDB hypertables and HashiCorp Vault field-level encryption.',
-    category: 'fullstack',
-    featured: true,
-    role: 'Full Stack Engineer',
-    timeline: '2024',
-    githubUrl: 'https://github.com/shivaniKapoor-Dev',
-    summary: 'Engineered an enterprise IoT telemetry ingestion system supporting industrial protocols (MQTT, Modbus, OPC-UA) with TimescaleDB time-series storage, automated continuous aggregation, and cryptographic erasure compliance.',
-    problemStatement: 'High-frequency sensor telemetry created database write saturation, and regulatory compliance required strict cryptographic erasure of sensitive asset IP addresses and credentials.',
-    architectureOverview: 'Built with NestJS and TypeScript for a clean modular backend architecture, paired with Next.js for dashboard visualization. Leveraged TimescaleDB Hypertables with automated chunk compression and data retention policies. Integrated HashiCorp Vault Transit Engine for field-level encryption.',
-    codeSnippetPreview: {
-      filename: 'vault-transit-crypto.service.ts',
-      language: 'typescript',
-      code: `// Field-level encryption using HashiCorp Vault Transit Secrets Engine
-@Injectable()
-export class VaultEncryptionService {
-  constructor(private readonly vaultClient: VaultClient) {}
-
-  async encryptSensitiveField(plaintext: string): Promise<string> {
-    const base64Data = Buffer.from(plaintext).toString('base64');
-    const response = await this.vaultClient.write(
-      'transit/encrypt/asset-telemetry-key', 
-      { plaintext: base64Data }
-    );
-    return response.data.ciphertext; // e.g. "vault:v1:..."
-  }
-
-  // Cryptographic erasure: Revoking the key immediately invalidates all associated ciphertexts
-}`
-    },
-    techStack: [
-      { name: 'NestJS & TypeScript', category: 'backend', why: 'Enterprise architectural patterns (Dependency Injection, modular providers, guards).' },
-      { name: 'Next.js & React', category: 'frontend', why: 'Server-side rendered telemetry analytics and real-time visualization widgets.' },
-      { name: 'TimescaleDB (PostgreSQL)', category: 'database', why: 'Hypertable partitioning, continuous aggregates (cagg), and timeseries compression.' },
-      { name: 'HashiCorp Vault', category: 'devops', why: 'Transit Secrets Engine for field-level encryption and zero-knowledge cryptographic erasure.' },
-      { name: 'MQTT / OPC-UA / Modbus', category: 'architecture', why: 'Industrial protocol connectors for continuous machine telemetry ingestion.' },
-      { name: 'Mongoose & MongoDB', category: 'database', why: 'Flexible schema storage for unstructured IoT sensor configuration metadata.' }
-    ],
-    keyChallenges: [
-      {
-        title: 'High-Volume Timeseries Ingestion & Aggregation',
-        problem: 'Raw sensor queries over millions of telemetry points led to slow dashboard load times and high CPU utilization.',
-        solution: 'Implemented TimescaleDB continuous aggregates (cagg) with automated materialized views refreshed on a rolling schedule.',
-        engineeringTakeaway: 'Pre-aggregating timeseries data at the database layer reduces dashboard read latency by 90%.'
-      },
-      {
-        title: 'Cryptographic Erasure Compliance Without Table Re-writes',
-        problem: 'GDPR compliance required permanent deletion of sensitive IP addresses without expensive DELETE operations on billions of rows.',
-        solution: 'Encrypted sensitive fields using distinct keys per tenant via HashiCorp Vault. Deleting the Vault key renders historical ciphertext cryptographically unrecoverable instantly.',
-        engineeringTakeaway: 'Cryptographic erasure provides guaranteed privacy compliance without degrading timeseries storage performance.'
-      }
-    ],
-    metrics: [
-      { label: 'Telemetry Throughput', value: '10,000/sec', description: 'Peak ingested sensor data points per second' },
-      { label: 'Query Speedup', value: '12x Faster', description: 'Via TimescaleDB continuous aggregates' },
-      { label: 'Data Compression', value: '85% Savings', description: 'Automated hypertable chunk compression' }
-    ],
-    keyTakeaways: [
-      'Wrote automated telemetry archival and retention scripts with dry-run support',
-      'Configured Docker Compose environments for local development with HashiCorp Vault and TimescaleDB',
-      'Implemented WebSocket streaming for live industrial sensor monitoring'
-    ],
-    interviewQnA: [
-      {
-        question: 'What is cryptographic erasure and why did you use it with HashiCorp Vault?',
-        answer: 'Cryptographic erasure involves encrypting sensitive data with a key managed by a secure Key Management System (HashiCorp Vault). To "delete" the data across millions of immutable timeseries rows, you destroy the encryption key. Without the key, the ciphertext cannot be decrypted, achieving instantaneous compliance without executing expensive database mutations.'
-      },
-      {
-        question: 'How does TimescaleDB differ from standard PostgreSQL for IoT?',
-        answer: 'TimescaleDB partitions large tables into "hypertables" across time and space. Each chunk is an independent PostgreSQL table. This keeps B-tree indexes small enough to fit into RAM, preventing write performance degradation as datasets grow into hundreds of gigabytes.'
-      }
-    ]
-  },
-  {
-    id: 'talentflow-ai-job-scraper',
-    title: 'TalentFlow — AI Job Intelligence & Semantic Matcher',
-    subtitle: 'Automated job discovery engine with anti-bot bypass, semantic embeddings, and candidate-job matching.',
-    category: 'ai-automation',
-    featured: false,
-    role: 'Full Stack & Automation Developer',
-    timeline: '2024',
-    githubUrl: 'https://github.com/shivaniKapoor-Dev/JobScrapper_Talent_Flow',
-    summary: 'Built an end-to-end job intelligence system that automatically scrapes, processes, and matches developer job listings using NLP embeddings, Puppeteer automation, and MongoDB.',
-    problemStatement: 'Manual job hunting is time-consuming, and keyword matching frequently misses relevant roles that use different terminology.',
-    architectureOverview: 'Full stack architecture comprising a Node.js scraper service utilizing Puppeteer stealth wrappers, paired with Python/NLP semantic embedding models to score resume-to-job similarity. Backed by MongoDB and Redis cache.',
-    codeSnippetPreview: {
-      filename: 'scraper-pipeline.js',
-      language: 'javascript',
-      code: `// Resilient scraping with stealth fingerprinting and Redis caching
-async function scrapeJobBoard(keyword, location) {
-  const cacheKey = \`jobs:\${keyword}:\${location}\`;
-  const cached = await redis.get(cacheKey);
-  if (cached) return JSON.parse(cached);
-
-  const browser = await puppeteerRealBrowser.connect({
-    headless: "auto",
-    fingerprint: true,
-  });
-
-  const page = await browser.newPage();
-  await page.setUserAgent(getRotatedUserAgent());
-  const jobs = await extractStructuredJobCards(page);
-  
-  await redis.set(cacheKey, JSON.stringify(jobs), 'EX', 3600);
-  return jobs;
-}`
-    },
-    techStack: [
-      { name: 'Node.js & Express', category: 'backend', why: 'Lightweight asynchronous API service for managing scrapers and alerts.' },
-      { name: 'Puppeteer Real-Browser', category: 'architecture', why: 'Evades bot detection mechanisms and solves JavaScript-rendered SPAs.' },
-      { name: 'Python & NLP', category: 'architecture', why: 'Vector embeddings and semantic cosine similarity scoring.' },
-      { name: 'MongoDB', category: 'database', why: 'Document model accommodates variable job schemas from different job boards.' },
-      { name: 'Redis', category: 'backend', why: 'Caches query results to prevent redundant web scraping operations.' }
-    ],
-    keyChallenges: [
-      {
-        title: 'Bypassing Anti-Bot Rate Limiting',
-        problem: 'Frequent requests triggered Cloudflare CAPTCHAs and temporary IP blocks.',
-        solution: 'Implemented browser fingerprint randomization, human-like mouse movement delays, and request throttling with backoff retry algorithms.',
-        engineeringTakeaway: 'Robust scrapers require stochastic timing and dynamic browser signatures.'
-      }
-    ],
-    metrics: [
-      { label: 'Scraped Jobs Processed', value: '15,000+', description: 'Clean structured postings indexed' },
-      { label: 'Matching Accuracy', value: '88%', description: 'Semantic relevance over plain keyword search' },
-      { label: 'Automation Savings', value: '10+ hrs/wk', description: 'Automated daily search & candidate alert workflow' }
-    ],
-    keyTakeaways: [
-      'Engineered an intuitive frontend dashboard to review matched listings',
-      'Configured automated cron jobs with email notifications via Nodemailer',
-      'Applied text cleaning and tokenization pipelines for NLP evaluation'
-    ],
-    interviewQnA: [
-      {
-        question: 'Why did you use semantic embeddings instead of simple keyword matching?',
-        answer: 'Keyword matching fails with synonyms—for example, searching for "Full Stack" might miss a posting titled "Web Application Engineer" that requires Node.js and React. By converting descriptions and resumes into high-dimensional vector embeddings, we calculate mathematical cosine similarity, capturing contextual meaning rather than exact word overlap.'
+        question: 'Why did you choose Pixi.js over standard SVG for the map editor?',
+        answer: 'SVGs add heavy nodes to the browser DOM tree, causing layout re-calculations on every pan and zoom. Pixi.js utilizes WebGL to batch-draw sprites directly on the GPU framebuffer, maintaining a silky 60 FPS regardless of node count.'
       }
     ]
   }
@@ -322,49 +345,46 @@ async function scrapeJobBoard(keyword, location) {
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    title: 'Backend & System Architecture',
+    title: 'Full Stack & MERN Architecture',
     iconName: 'Server',
     skills: [
       { name: 'Node.js & Express 5', level: 'Advanced', context: 'High-throughput APIs, middleware architecture, routing' },
-      { name: 'TypeScript', level: 'Advanced', context: 'Strict typing, DTOs, generics, clean interface design' },
-      { name: 'NestJS', level: 'Proficient', context: 'Dependency injection, modular architectures, microservices' },
-      { name: 'RESTful API Design', level: 'Advanced', context: 'OpenAPI/Swagger documentation, versioned endpoints' },
-      { name: 'WebSockets (Socket.io)', level: 'Advanced', context: 'Real-time state synchronization, game events' },
-      { name: 'BullMQ & Queues', level: 'Proficient', context: 'Distributed job processing, background workers' }
+      { name: 'React 19 & Redux Toolkit', level: 'Advanced', context: 'Component state, memoized selectors, custom hooks' },
+      { name: 'MongoDB & Mongoose 9', level: 'Advanced', context: 'Document modeling, aggregation pipelines, transactions' },
+      { name: 'RESTful API Design', level: 'Advanced', context: 'Clean DTOs, versioning, express-validator schemas' },
+      { name: 'JWT & Role-Based Auth', level: 'Advanced', context: 'Multi-tenant authorization, salted passwords, security' },
+      { name: 'TypeScript', level: 'Advanced', context: 'Strict typing, DTO interfaces, generic data utilities' }
     ]
   },
   {
     title: 'Frontend & Interactive Canvas',
     iconName: 'Layout',
     skills: [
-      { name: 'React 19 & Next.js', level: 'Advanced', context: 'Hooks, custom state pipelines, SSR, modular architecture' },
+      { name: 'React & Vite', level: 'Advanced', context: 'Modern SPAs, fast HMR, optimized production bundles' },
       { name: 'Pixi.js (2D WebGL)', level: 'Advanced', context: 'GPU-accelerated canvas rendering, interactive node maps' },
+      { name: 'Tailwind CSS', level: 'Advanced', context: 'Modern responsive layouts, design token customization' },
       { name: '@xyflow/react', level: 'Proficient', context: 'Interactive node graph editors, workflow canvases' },
-      { name: 'Redux Toolkit', level: 'Advanced', context: 'Predictable global state, slices, memoized selectors' },
-      { name: 'Tailwind CSS', level: 'Advanced', context: 'Responsive designs, modern UI, dark mode styling' },
       { name: 'TanStack Table v8', level: 'Proficient', context: 'Headless data virtualization and complex data grids' }
     ]
   },
   {
-    title: 'Databases & Performance Caching',
+    title: 'Databases, Caching & Automation',
     iconName: 'Database',
     skills: [
+      { name: 'MongoDB', level: 'Advanced', context: 'Cursor-based pagination, bulkWrite upserts, indexing' },
       { name: 'PostgreSQL & Prisma ORM', level: 'Advanced', context: 'Relational modeling, migrations, connection pooling' },
       { name: 'Redis', level: 'Advanced', context: 'Distributed locks, rate limiting, session store, caching' },
-      { name: 'TimescaleDB', level: 'Proficient', context: 'Hypertables, continuous aggregates, timeseries retention' },
-      { name: 'MongoDB & Mongoose', level: 'Proficient', context: 'NoSQL document modeling, aggregation pipelines' }
+      { name: 'Puppeteer Automation', level: 'Advanced', context: 'Headless browser automation, stealth scraping, cron jobs' }
     ]
   },
   {
     title: 'DevOps, Security & Tools',
     iconName: 'ShieldCheck',
     skills: [
-      { name: 'HashiCorp Vault', level: 'Proficient', context: 'Transit secrets engine, field-level encryption' },
-      { name: 'Docker & Docker Compose', level: 'Proficient', context: 'Multi-container local services, reproducible environments' },
-      { name: 'AWS (S3 & Cloud services)', level: 'Proficient', context: 'Cloud storage, asset streaming, CDN integration' },
-      { name: 'Git & GitLab / GitHub', level: 'Advanced', context: 'Branching workflows, code reviews, CI/CD pipelines' },
+      { name: 'Git & GitHub / GitLab', level: 'Advanced', context: 'Branching workflows, CI/CD actions, version control' },
+      { name: 'express-rate-limit & Helmet', level: 'Advanced', context: 'Brute-force protection, HTTP header security' },
       { name: 'Postman & Swagger', level: 'Advanced', context: 'API testing, automated endpoint collections' },
-      { name: 'Puppeteer / Web Automation', level: 'Proficient', context: 'Browser automation, stealth scraping, data pipelines' }
+      { name: 'Winston Logger & Nodemailer', level: 'Proficient', context: 'Production observability and automated email dispatches' }
     ]
   }
 ];
@@ -389,30 +409,30 @@ export const WORK_EXPERIENCE: ExperienceItem[] = [
 
 export const INTERVIEW_CHEATSHEET = [
   {
-    topic: 'System Design: How do you design high-throughput APIs?',
+    topic: 'MERN System Design: Scalable eCommerce & Inventory Consistency',
     points: [
-      'Apply Redis caching for read-heavy operations with deterministic TTLs and cache invalidation hooks.',
-      'Offload intensive background tasks (e.g. map generation, data indexing) to BullMQ asynchronous queues.',
-      'Use connection pooling (pg-pool / Prisma connection limits) to prevent database exhaustion under spike loads.',
-      'Implement Redis rate-limiting (e.g. rate-limit-redis) to protect services against malicious traffic spikes.'
+      'Prevent overselling by wrapping stock decrements in atomic MongoDB queries within multi-document transaction sessions.',
+      'Separate customer, vendor, and admin capabilities using secure Role-Based Access Control (RBAC) middleware.',
+      'Enforce vendor data isolation by scoping every query to the authenticated vendor ID.',
+      'Use stateful cart persistence synchronized with backend validation prior to payment capture.'
     ]
   },
   {
-    topic: 'Frontend Performance: Rendering 1,000+ interactive elements smoothly',
+    topic: 'Web Scraping & Automation: Resilience and Cursor Pagination',
     points: [
-      'Avoid bloating the DOM: offload heavy spatial visual objects to WebGL (Pixi.js) canvas layers.',
-      'Keep React state shallow and use memoized selectors (Reselect / Redux Toolkit) to isolate renders.',
-      'Virtualize data tables with TanStack Table to render only elements currently in the viewport.',
-      'Use Web Workers or requestAnimationFrame for computationally expensive physics or path calculations.'
+      'Replace offset-based pagination (skip/limit) with cursor-based pagination (_id and timestamp) to maintain O(1) query time.',
+      'Evade bot detection by randomizing human-like scrolling delays and spoofing navigator.webdriver properties in Puppeteer.',
+      'Use bulkWrite operations to perform high-frequency upserts without creating duplicate records.',
+      'Isolate browser instances in try/catch/finally blocks to ensure browser.close() executes, preventing memory leaks.'
     ]
   },
   {
-    topic: 'Data Integrity & Security: Race conditions & cryptographic protection',
+    topic: 'API Security & Data Integrity: Authentication & Rate Limiting',
     points: [
-      'Use Redis atomic locks (SET NX EX) to serialize critical operations across concurrent requests.',
-      'Rely on database transactions (PostgreSQL Serializable/Repeatable Read) for multi-table updates.',
-      'Implement field-level encryption using HashiCorp Vault Transit engine for sensitive PII.',
-      'Ensure zero-knowledge cryptographic erasure by deleting encryption keys rather than mutating immutable logs.'
+      'Protect public authentication endpoints against brute-force attacks using express-rate-limit sliding windows.',
+      'Verify authorization headers against JWT claims to prevent horizontal and vertical privilege escalation.',
+      'Salt and hash passwords with bcryptjs (cost factor 10) and transmit auth tokens in secure HTTP-only cookies.',
+      'Sanitize all incoming DTO payloads with express-validator schemas before passing data to service layers.'
     ]
   }
 ];
