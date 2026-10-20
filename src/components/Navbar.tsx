@@ -5,8 +5,7 @@ import {
   Mail, 
   Terminal, 
   Menu, 
-  X,
-  Sparkles
+  X
 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
@@ -34,7 +33,7 @@ export const Navbar: React.FC = () => {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-white/92 backdrop-blur-md border-b border-slate-200/90 shadow-sm py-3.5' 
+          ? 'bg-[#FFF1F4]/95 backdrop-blur-md border-b border-[#FBCFE8] shadow-sm py-3.5' 
           : 'bg-transparent py-5'
       }`}
     >
@@ -42,18 +41,18 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center justify-between">
           {/* Logo / Brand */}
           <a href="#" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-rose-600 via-slate-900 to-emerald-700 flex items-center justify-center font-bold text-white shadow-md shadow-rose-600/20 group-hover:scale-105 transition-transform">
-              <Terminal className="w-5 h-5 text-rose-200" />
+            <div className="w-10 h-10 rounded-xl bg-[#F45B8D] flex items-center justify-center font-bold text-white shadow-sm shadow-[#F45B8D]/25 group-hover:scale-105 transition-transform">
+              <Terminal className="w-5 h-5 text-white" />
             </div>
             <div>
-              <div className="font-extrabold text-slate-900 group-hover:text-rose-600 transition-colors flex items-center gap-2">
+              <div className="font-extrabold text-[#24151D] group-hover:text-[#F45B8D] transition-colors flex items-center gap-2">
                 {PERSONAL_INFO.name}
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-100/80 text-emerald-800 border border-emerald-300 shadow-xs">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#FFE4EC] text-[#E83E76] border border-[#FBCFE8]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E83E76] mr-1.5 animate-pulse"></span>
                   Available for Hire
                 </span>
               </div>
-              <p className="text-xs text-slate-500 font-semibold">{PERSONAL_INFO.title}</p>
+              <p className="text-xs text-[#6B5561] font-semibold">{PERSONAL_INFO.title}</p>
             </div>
           </a>
 
@@ -63,7 +62,7 @@ export const Navbar: React.FC = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-sm font-semibold text-slate-700 hover:text-rose-600 transition-colors"
+                className="text-sm font-semibold text-[#6B5561] hover:text-[#F45B8D] transition-colors"
               >
                 {link.label}
               </a>
@@ -77,7 +76,7 @@ export const Navbar: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
-              className="p-2 text-slate-600 hover:text-slate-950 hover:bg-slate-100 rounded-xl transition-colors"
+              className="p-2 text-[#6B5561] hover:text-[#24151D] hover:bg-[#FFE4EC] rounded-xl transition-colors"
             >
               <GithubIcon className="w-5 h-5" />
             </a>
@@ -86,15 +85,15 @@ export const Navbar: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
-              className="p-2 text-slate-600 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-colors"
+              className="p-2 text-[#6B5561] hover:text-[#F45B8D] hover:bg-[#FFE4EC] rounded-xl transition-colors"
             >
               <LinkedinIcon className="w-5 h-5" />
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-bold text-white bg-gradient-to-r from-rose-600 via-rose-700 to-slate-900 hover:from-rose-500 hover:to-slate-800 rounded-xl shadow-md shadow-rose-600/20 transition-all hover:scale-103"
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-bold text-white bg-[#F45B8D] hover:bg-[#E83E76] rounded-xl shadow-md shadow-[#F45B8D]/20 transition-all hover:scale-102"
             >
-              <Mail className="w-4 h-4 text-rose-200" />
+              <Mail className="w-4 h-4 text-white" />
               <span>Get in Touch</span>
             </a>
           </div>
@@ -102,7 +101,7 @@ export const Navbar: React.FC = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-slate-700 hover:text-slate-900 rounded-xl hover:bg-slate-100"
+            className="md:hidden p-2 text-[#6B5561] hover:text-[#24151D] rounded-xl hover:bg-[#FFE4EC]"
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -112,24 +111,24 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white/98 border-b border-slate-200 px-6 py-5 backdrop-blur-xl shadow-xl">
+        <div className="md:hidden bg-[#FFF1F4]/98 border-b border-[#FBCFE8] px-6 py-5 backdrop-blur-xl shadow-lg">
           <div className="flex flex-col gap-3">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-slate-800 hover:text-rose-600 font-semibold py-1.5"
+                className="text-[#24151D] hover:text-[#F45B8D] font-bold py-1.5"
               >
                 {link.label}
               </a>
             ))}
-            <div className="pt-3 border-t border-slate-200 flex items-center gap-4">
+            <div className="pt-3 border-t border-[#FBCFE8] flex items-center gap-4">
               <a
                 href={PERSONAL_INFO.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-slate-700 hover:text-slate-950 font-semibold"
+                className="flex items-center gap-2 text-sm text-[#6B5561] hover:text-[#24151D] font-bold"
               >
                 <GithubIcon className="w-4 h-4" /> GitHub
               </a>
@@ -137,7 +136,7 @@ export const Navbar: React.FC = () => {
                 href={PERSONAL_INFO.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-slate-700 hover:text-rose-600 font-semibold"
+                className="flex items-center gap-2 text-sm text-[#6B5561] hover:text-[#F45B8D] font-bold"
               >
                 <LinkedinIcon className="w-4 h-4" /> LinkedIn
               </a>
@@ -145,7 +144,7 @@ export const Navbar: React.FC = () => {
             <a
               href="#contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 bg-gradient-to-r from-rose-600 to-slate-900 text-white font-bold rounded-xl mt-2 shadow-md"
+              className="w-full text-center py-2.5 bg-[#F45B8D] hover:bg-[#E83E76] text-white font-bold rounded-xl mt-2 shadow-md shadow-[#F45B8D]/20"
             >
               Hire Shivani
             </a>

@@ -2,92 +2,66 @@
 
 @layer base {
   :root {
-    --primary-rose: #e11d48;
-    --primary-emerald: #059669;
-    --primary-indigo: #4f46e5;
+    --bg-main: #FFF1F4;
+    --bg-section: #FFE4EC;
+    --bg-glass: #FCE7F3;
+    --icon-rose: #F9A8C4;
+    --btn-bright-pink: #F45B8D;
+    --btn-deep-rose: #E83E76;
+    --border-soft-pink: #FBCFE8;
+    --card-white: #FFFFFF;
+    --text-dark: #24151D;
+    --text-muted: #6B5561;
   }
 
   html {
     scroll-behavior: smooth;
   }
 
-  /* Crisp smooth scrollbar */
+  /* Custom smooth scrollbar in user's palette */
   ::-webkit-scrollbar {
     width: 7px;
     height: 7px;
   }
   ::-webkit-scrollbar-track {
-    background: #f8fafc;
+    background: #FFF1F4;
   }
   ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: #FBCFE8;
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+    background: #F9A8C4;
   }
 }
 
-/* Crisp delicate dot grid */
+/* Subtle dot grid with soft pink dots */
 .dot-grid {
-  background-image: radial-gradient(#cbd5e1 1.2px, transparent 1.2px);
-  background-size: 32px 32px;
+  background-image: radial-gradient(#FBCFE8 1.2px, transparent 1.2px);
+  background-size: 28px 28px;
 }
 
-/* Luminous Mesh Gradient Background */
-.mesh-gradient-bg {
-  background: 
-    radial-gradient(at 0% 0%, rgba(254, 205, 211, 0.45) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(167, 243, 208, 0.45) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(253, 230, 138, 0.35) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, rgba(199, 210, 254, 0.35) 0px, transparent 50%);
+/* Glass panel overlay with #FCE7F3 */
+.glass-pink-panel {
+  background: rgba(252, 231, 243, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid #FBCFE8;
 }
 
-/* Crisp Glassmorphism with Pop */
-.vibrant-glass {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+/* Smooth card hover in user's palette */
+.pink-card-hover {
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pink-card-hover:hover {
+  transform: translateY(-3px);
+  border-color: #F45B8D;
+  box-shadow: 0 16px 32px -8px rgba(244, 91, 141, 0.18), 0 4px 12px -2px rgba(232, 62, 118, 0.08);
 }
 
-.vibrant-card-hover {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.vibrant-card-hover:hover {
-  transform: translateY(-4px);
-  border-color: rgba(225, 29, 72, 0.35);
-  box-shadow: 0 20px 35px -10px rgba(225, 29, 72, 0.12), 0 8px 16px -4px rgba(5, 150, 105, 0.08);
-}
-
-/* Eye-Catching Multi-Tone Gradients */
-.vibrant-gradient-text {
-  background: linear-gradient(135deg, #0f172a 0%, #be123c 50%, #047857 100%);
+/* User's Gradient Accent */
+.pink-gradient-text {
+  background: linear-gradient(135deg, #24151D 0%, #E83E76 50%, #F45B8D 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.rose-emerald-gradient {
-  background: linear-gradient(135deg, #e11d48 0%, #f43f5e 50%, #059669 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.glow-pill-rose {
-  background: #fff1f2;
-  border: 1px solid #fecdd3;
-  color: #be123c;
-}
-
-.glow-pill-emerald {
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
-  color: #047857;
-}
-
-.glow-pill-warm {
-  background: #fffbeb;
-  border: 1px solid #fde68a;
-  color: #b45309;
 }
