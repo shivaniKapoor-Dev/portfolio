@@ -22,83 +22,91 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden dot-grid">
-      {/* Soft Trending Pastel Glows: Blush Pink, Sage Olive & Warm Beige */}
-      <div className="absolute top-16 left-1/2 -translate-x-1/2 w-[650px] h-[380px] bg-gradient-to-tr from-[#fcebee]/70 via-[#f4eee6]/60 to-[#e9f2e7]/70 blur-[130px] rounded-full pointer-events-none -z-10" />
-      <div className="absolute top-36 left-8 w-72 h-72 bg-[#fae8ea]/50 blur-[90px] rounded-full pointer-events-none -z-10" />
-      <div className="absolute top-48 right-8 w-72 h-72 bg-[#eaf1e7]/60 blur-[90px] rounded-full pointer-events-none -z-10" />
+    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden mesh-gradient-bg dot-grid">
+      {/* Radiant Glowing Orbs (Soft Rose Pink, Fresh Olive-Emerald & Warm Amber) */}
+      <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[720px] h-[400px] bg-gradient-to-tr from-rose-200/60 via-pink-100/50 to-emerald-200/50 blur-[130px] rounded-full pointer-events-none -z-10" />
+      <div className="absolute top-32 left-6 w-80 h-80 bg-rose-300/35 blur-[100px] rounded-full pointer-events-none -z-10" />
+      <div className="absolute top-40 right-6 w-80 h-80 bg-emerald-200/40 blur-[100px] rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           
           {/* Availability Pill */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-[#e7ded2] text-[#424b3d] text-xs sm:text-sm font-medium mb-6 shadow-xs backdrop-blur-sm">
-            <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#527a4b] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#3e6437]"></span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-rose-200/80 text-slate-800 text-xs sm:text-sm font-semibold mb-6 shadow-md shadow-rose-500/5">
+            <span className="flex h-2.5 w-2.5 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
             </span>
-            <span className="font-semibold text-[#242c20]">Software Engineer at Oodles Technologies</span>
-            <span className="text-[#cbbfb0]">•</span>
-            <span className="text-[#646e60]">Full Stack / Backend / Frontend</span>
+            <span className="font-bold text-slate-900">Software Engineer at Oodles Technologies</span>
+            <span className="text-slate-300">•</span>
+            <span className="text-rose-700 font-bold">Full Stack / Backend / Frontend</span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-[#1e251b] mb-6">
-            Hi, I'm <span className="gradient-headline">{PERSONAL_INFO.name}</span>
-            <span className="block text-2xl sm:text-4xl lg:text-5xl font-bold text-[#444d3f] mt-3">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-950 mb-6">
+            Hi, I'm <span className="vibrant-gradient-text">{PERSONAL_INFO.name}</span>
+            <span className="block text-2xl sm:text-4xl lg:text-5xl font-extrabold text-slate-800 mt-3">
               Full Stack Software Engineer
             </span>
           </h1>
 
           {/* Value Proposition */}
-          <p className="text-lg sm:text-xl text-[#535d4f] max-w-3xl mx-auto leading-relaxed mb-9">
-            Specializing in high-throughput <span className="text-[#2d3a29] font-bold border-b border-[#2d3a29]/30">Node.js/TypeScript backend services</span>, 
-            interactive <span className="text-[#9c3f4c] font-bold border-b border-[#9c3f4c]/30">React 19 & Pixi.js (WebGL)</span> canvas interfaces, 
-            and scalable telemetry systems with <span className="text-[#3b5236] font-bold border-b border-[#3b5236]/30">TimescaleDB & Redis</span>.
+          <p className="text-lg sm:text-xl text-slate-700 max-w-3xl mx-auto leading-relaxed mb-9 font-medium">
+            Building high-throughput <span className="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">Node.js/TypeScript backends</span>, 
+            GPU-accelerated <span className="text-rose-600 font-bold bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200">React 19 & Pixi.js (WebGL)</span> canvas interfaces, 
+            and scalable telemetry systems with <span className="text-indigo-700 font-bold bg-indigo-50 px-2 py-0.5 rounded-md border border-indigo-200">TimescaleDB & Redis</span>.
           </p>
 
-          {/* Trending Color Chips: Warm Beige, Olive, Blush */}
+          {/* Trending Color Chips: Rose Pink, Fresh Olive-Emerald & Warm Sand */}
           <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-11 text-xs sm:text-sm">
-            <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/90 border border-[#e4dcce] text-[#343e30] shadow-xs">
-              <Server className="w-4 h-4 text-[#394a34]" />
-              <span className="font-medium">Distributed Backend & APIs</span>
+            <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-800 shadow-sm hover:border-emerald-300 transition-all">
+              <div className="p-1 rounded-md bg-emerald-100 text-emerald-700">
+                <Server className="w-4 h-4" />
+              </div>
+              <span className="font-bold">Distributed Backend & APIs</span>
             </div>
-            <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/90 border border-[#f3d9dd] text-[#343e30] shadow-xs">
-              <Layers className="w-4 h-4 text-[#a34753]" />
-              <span className="font-medium">WebGL & Canvas 60 FPS</span>
+            <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-800 shadow-sm hover:border-rose-300 transition-all">
+              <div className="p-1 rounded-md bg-rose-100 text-rose-600">
+                <Layers className="w-4 h-4" />
+              </div>
+              <span className="font-bold">WebGL & Canvas 60 FPS</span>
             </div>
-            <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/90 border border-[#d6e5d2] text-[#343e30] shadow-xs">
-              <Cpu className="w-4 h-4 text-[#445b3e]" />
-              <span className="font-medium">TimescaleDB & IoT Telemetry</span>
+            <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-800 shadow-sm hover:border-emerald-300 transition-all">
+              <div className="p-1 rounded-md bg-emerald-100 text-emerald-800">
+                <Cpu className="w-4 h-4" />
+              </div>
+              <span className="font-bold">TimescaleDB & IoT Telemetry</span>
             </div>
-            <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/90 border border-[#e4dcce] text-[#343e30] shadow-xs">
-              <ShieldCheck className="w-4 h-4 text-[#7d5642]" />
-              <span className="font-medium">Vault Cryptographic Security</span>
+            <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-800 shadow-sm hover:border-amber-300 transition-all">
+              <div className="p-1 rounded-md bg-amber-100 text-amber-800">
+                <ShieldCheck className="w-4 h-4" />
+              </div>
+              <span className="font-bold">Vault Cryptographic Security</span>
             </div>
           </div>
 
           {/* Action CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href="#projects"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base font-semibold text-[#faf8f5] bg-[#2d3a29] hover:bg-[#1f281d] rounded-xl shadow-md shadow-[#2d3a29]/15 transition-all hover:scale-102"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 text-base font-extrabold text-white bg-gradient-to-r from-rose-600 via-rose-700 to-slate-900 hover:from-rose-500 hover:to-slate-800 rounded-xl shadow-lg shadow-rose-600/25 transition-all hover:scale-103"
             >
               <span>Explore Technical Case Studies</span>
-              <ArrowRight className="w-4 h-4 text-[#f6d7dc]" />
+              <ArrowRight className="w-4 h-4 text-rose-200" />
             </a>
 
             <button
               onClick={copyEmail}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 text-base font-medium text-[#2d3a29] bg-white hover:bg-[#faf6f0] border border-[#e4dcd0] rounded-xl shadow-xs transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base font-bold text-slate-800 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl shadow-sm hover:border-rose-300 transition-all"
             >
               {copied ? (
                 <>
-                  <Check className="w-4 h-4 text-[#3e6437]" />
-                  <span className="text-[#2d4b27] font-semibold">Email Copied to Clipboard!</span>
+                  <Check className="w-4 h-4 text-emerald-600" />
+                  <span className="text-emerald-700 font-extrabold">Email Copied to Clipboard!</span>
                 </>
               ) : (
                 <>
-                  <Copy className="w-4 h-4 text-[#8a9485]" />
+                  <Copy className="w-4 h-4 text-rose-500" />
                   <span>Copy Direct Email</span>
                 </>
               )}
@@ -108,7 +116,7 @@ export const Hero: React.FC = () => {
               href={PERSONAL_INFO.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 text-base font-medium text-[#495344] hover:text-[#a34753] bg-white hover:bg-[#fdf4f5] border border-[#e4dcd0] hover:border-[#f3d9dd] rounded-xl shadow-xs transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 text-base font-bold text-slate-700 hover:text-rose-600 bg-white hover:bg-rose-50/50 border border-slate-200 hover:border-rose-300 rounded-xl shadow-sm transition-all"
             >
               <span>LinkedIn Profile</span>
             </a>
@@ -122,7 +130,7 @@ export const Hero: React.FC = () => {
         <a 
           href="#stats" 
           aria-label="Scroll down to metrics"
-          className="text-[#99a494] hover:text-[#2d3a29] transition-colors animate-bounce p-2"
+          className="text-slate-400 hover:text-rose-600 transition-colors animate-bounce p-2"
         >
           <ChevronDown className="w-5 h-5" />
         </a>
