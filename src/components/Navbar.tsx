@@ -5,7 +5,8 @@ import {
   Mail, 
   Terminal, 
   Menu, 
-  X
+  X,
+  ExternalLink
 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
@@ -33,7 +34,7 @@ export const Navbar: React.FC = () => {
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-[#FFF1F4]/95 backdrop-blur-md border-b border-[#FBCFE8] shadow-sm py-3.5' 
+          ? 'bg-[#FFF1F4]/95 backdrop-blur-md border-b border-[#FBCFE8] shadow-sm py-3' 
           : 'bg-transparent py-5'
       }`}
     >
@@ -56,8 +57,8 @@ export const Navbar: React.FC = () => {
             </div>
           </a>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-7">
+          {/* Desktop Nav Links */}
+          <nav className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <a
                 key={link.label}
@@ -69,29 +70,40 @@ export const Navbar: React.FC = () => {
             ))}
           </nav>
 
-          {/* Action Buttons */}
-          <div className="hidden sm:flex items-center gap-3">
+          {/* Action Buttons (GitHub, Performable LinkedIn, Performable Get in Touch) */}
+          <div className="hidden sm:flex items-center gap-2.5">
+            {/* GitHub */}
             <a
               href={PERSONAL_INFO.github}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
-              className="p-2 text-[#6B5561] hover:text-[#24151D] hover:bg-[#FFE4EC] rounded-xl transition-colors"
+              title="View GitHub Repositories"
+              className="p-2 text-[#6B5561] hover:text-[#24151D] hover:bg-[#FFE4EC] rounded-xl transition-colors border border-transparent hover:border-[#FBCFE8]"
             >
               <GithubIcon className="w-5 h-5" />
             </a>
+
+            {/* Performable LinkedIn Button */}
             <a
               href={PERSONAL_INFO.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn Profile"
-              className="p-2 text-[#6B5561] hover:text-[#F45B8D] hover:bg-[#FFE4EC] rounded-xl transition-colors"
+              aria-label="Open LinkedIn Profile"
+              title="Open LinkedIn Profile (Shivani Kapoor)"
+              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-[#24151D] hover:text-[#F45B8D] bg-white hover:bg-[#FFE4EC] border border-[#FBCFE8] hover:border-[#F45B8D] rounded-xl shadow-xs transition-all hover:scale-102"
             >
-              <LinkedinIcon className="w-5 h-5" />
+              <LinkedinIcon className="w-4 h-4 text-[#F45B8D]" />
+              <span>LinkedIn</span>
+              <ExternalLink className="w-3 h-3 text-[#F9A8C4]" />
             </a>
+
+            {/* Performable Get in Touch (Direct Email to shivanikapoor5588@gmail.com) */}
             <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-bold text-white bg-[#F45B8D] hover:bg-[#E83E76] rounded-xl shadow-md shadow-[#F45B8D]/20 transition-all hover:scale-102"
+              href={`mailto:${PERSONAL_INFO.email}?subject=Job%20Opportunity%20for%20Shivani%20Kapoor&body=Hi%20Shivani,%0D%0A%0D%0AWe%20reviewed%20your%20portfolio%20and%20would%20like%20to%20discuss%20an%20engineering%20opportunity...`}
+              aria-label="Send Email to Shivani Kapoor"
+              title={`Compose email to ${PERSONAL_INFO.email}`}
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-bold text-white bg-[#F45B8D] hover:bg-[#E83E76] rounded-xl shadow-md shadow-[#F45B8D]/25 transition-all hover:scale-102"
             >
               <Mail className="w-4 h-4 text-white" />
               <span>Get in Touch</span>
@@ -101,7 +113,7 @@ export const Navbar: React.FC = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-[#6B5561] hover:text-[#24151D] rounded-xl hover:bg-[#FFE4EC]"
+            className="lg:hidden p-2 text-[#6B5561] hover:text-[#24151D] rounded-xl hover:bg-[#FFE4EC]"
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -111,7 +123,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#FFF1F4]/98 border-b border-[#FBCFE8] px-6 py-5 backdrop-blur-xl shadow-lg">
+        <div className="lg:hidden bg-[#FFF1F4]/98 border-b border-[#FBCFE8] px-6 py-5 backdrop-blur-xl shadow-lg">
           <div className="flex flex-col gap-3">
             {navLinks.map((link) => (
               <a
@@ -123,12 +135,14 @@ export const Navbar: React.FC = () => {
                 {link.label}
               </a>
             ))}
-            <div className="pt-3 border-t border-[#FBCFE8] flex items-center gap-4">
+            
+            {/* Mobile Performable Buttons */}
+            <div className="pt-3 border-t border-[#FBCFE8] grid grid-cols-2 gap-2">
               <a
                 href={PERSONAL_INFO.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-[#6B5561] hover:text-[#24151D] font-bold"
+                className="inline-flex items-center justify-center gap-1.5 p-2.5 text-xs font-bold text-[#6B5561] hover:text-[#24151D] bg-white border border-[#FBCFE8] rounded-xl"
               >
                 <GithubIcon className="w-4 h-4" /> GitHub
               </a>
@@ -136,17 +150,19 @@ export const Navbar: React.FC = () => {
                 href={PERSONAL_INFO.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-[#6B5561] hover:text-[#F45B8D] font-bold"
+                className="inline-flex items-center justify-center gap-1.5 p-2.5 text-xs font-bold text-[#24151D] bg-white border border-[#FBCFE8] hover:bg-[#FFE4EC] rounded-xl"
               >
-                <LinkedinIcon className="w-4 h-4" /> LinkedIn
+                <LinkedinIcon className="w-4 h-4 text-[#F45B8D]" /> LinkedIn
               </a>
             </div>
+
+            {/* Performable Mobile Get in Touch */}
             <a
-              href="#contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full text-center py-2.5 bg-[#F45B8D] hover:bg-[#E83E76] text-white font-bold rounded-xl mt-2 shadow-md shadow-[#F45B8D]/20"
+              href={`mailto:${PERSONAL_INFO.email}?subject=Job%20Opportunity%20for%20Shivani%20Kapoor`}
+              className="w-full text-center py-2.5 bg-[#F45B8D] hover:bg-[#E83E76] text-white font-bold rounded-xl mt-2 shadow-md shadow-[#F45B8D]/20 flex items-center justify-center gap-2"
             >
-              Hire Shivani
+              <Mail className="w-4 h-4 text-white" />
+              <span>Get in Touch ({PERSONAL_INFO.email})</span>
             </a>
           </div>
         </div>
