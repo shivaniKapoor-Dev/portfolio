@@ -21,7 +21,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onSelectProjec
     { id: 'all', label: 'All Projects' },
     { id: 'fullstack', label: 'Full Stack' },
     { id: 'backend', label: 'Backend & Systems' },
-    { id: 'frontend', label: 'Frontend & WebGL' },
+    { id: 'frontend', label: 'Frontend & UI' },
     { id: 'ai-automation', label: 'AI & Automation' },
   ];
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import { HIGHLIGHT_STATS } from '../data/portfolioData';
-import { Zap, Activity, Cpu, CheckCircle2 } from 'lucide-react';
+import { Zap, Bot, Globe, Sparkles } from 'lucide-react';
 
 export const StatsBar: React.FC = () => {
   const icons = [
-    <CheckCircle2 className="w-5 h-5 text-[#F45B8D]" />,
+    <Globe className="w-5 h-5 text-[#F45B8D]" />,
     <Zap className="w-5 h-5 text-[#F45B8D]" />,
-    <Activity className="w-5 h-5 text-[#F45B8D]" />,
-    <Cpu className="w-5 h-5 text-[#F45B8D]" />,
+    <Bot className="w-5 h-5 text-[#F45B8D]" />,
+    <Sparkles className="w-5 h-5 text-[#F45B8D]" />,
   ];
 
   return (

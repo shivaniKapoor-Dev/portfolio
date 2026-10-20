@@ -3,8 +3,8 @@ import { ProjectCaseStudy, ExperienceItem, SkillCategory } from '../types';
 export const PERSONAL_INFO = {
   name: 'Shivani Kapoor',
   title: 'Full Stack Software Engineer',
-  tagline: 'Building High-Concurrency Backend Engines, Scalable MERN Platforms & Interactive Web Apps',
-  bio: 'Full Stack Software Engineer with deep hands-on expertise building production systems with Node.js, TypeScript, React, MongoDB, PostgreSQL, Redis, and WebGL. Experienced in architecting distributed backend services, multivendor e-commerce engines, web automation pipelines, and high-performance frontend interfaces.',
+  tagline: 'Building Scalable MERN Platforms, High-Performance APIs & Intelligent Web Automations',
+  bio: 'Full Stack Software Engineer with deep hands-on expertise building production web platforms with Node.js, TypeScript, React, Express, MongoDB, PostgreSQL, and Redis. Experienced in architecting secure multi-tenant backends, resilient web automation crawlers, and responsive modern user interfaces.',
   email: 'shivanikapoor5588@gmail.com',
   workEmail: 'shivani.kapoor@oodles.io',
   location: 'Gurugram, India',
@@ -15,10 +15,10 @@ export const PERSONAL_INFO = {
 };
 
 export const HIGHLIGHT_STATS = [
-  { label: 'Public Repositories', value: '4+', detail: 'Full-stack MERN & distributed systems' },
-  { label: 'API Response Latency', value: '<80ms', detail: 'Optimized queries & indexing' },
-  { label: 'Automated Job Ingestion', value: '10k+', detail: 'Headless browser & cron pipelines' },
-  { label: 'Interactive Canvas Rendering', value: '60 FPS', detail: 'WebGL & Pixi.js acceleration' },
+  { label: 'Full-Stack Codebases', value: '3+', detail: 'Production-ready MERN & TypeScript architectures' },
+  { label: 'Fast API Speed', value: '<80ms', detail: 'Instant page loads via indexed queries & Redis caching' },
+  { label: 'Live Records Automated', value: '15k+', detail: '24/7 background pipelines saving 12+ hrs/week' },
+  { label: 'Engineering Velocity', value: '3x Faster', detail: 'AI-augmented delivery with human architectural rigor' },
 ];
 
 export const PROJECTS: ProjectCaseStudy[] = [
@@ -273,73 +273,6 @@ export const authorizeRoles = (...allowedRoles) => {
         answer: 'Passwords are never stored in plaintext. They are salted and hashed using bcryptjs with a cost factor of 10 prior to persistence. Upon login, bcrypt.compare verifies the hash. On successful validation, a signed JWT token is issued with a short expiration TTL.'
       }
     ]
-  },
-  {
-    id: 'safari-world-hunt-studio',
-    title: 'Safari World Hunt — Distributed Game Engine & WebGL Admin Studio',
-    subtitle: 'High-throughput gaming backend and 60 FPS WebGL 2D canvas editor built with Node.js, TypeScript, PostgreSQL, Prisma, Redis, and React 19 + Pixi.js.',
-    category: 'frontend',
-    featured: false,
-    role: 'Core Software Engineer (Oodles)',
-    timeline: '2024 - Present',
-    liveUrl: 'https://admin-panel-frontend-nine-wine.vercel.app',
-    githubUrl: 'https://github.com/shivaniKapoor-Dev/portfolio',
-    summary: 'Engineered an enterprise gaming backend and visual canvas editor for procedural maps. Features Redis distributed locks, versioned live releases, and GPU-accelerated Pixi.js 2D rendering for inspecting hundreds of interconnected game nodes at a steady 60 FPS.',
-    problemStatement: 'Visualizing and manipulating 500+ interconnected spatial nodes in standard DOM caused severe frame drops and lagging click selection.',
-    architectureOverview: 'Full-stack platform built with Node.js, TypeScript, Prisma, PostgreSQL, and Redis on the backend; paired with React 19, Pixi.js WebGL rendering, @xyflow/react, and Redux Toolkit on the frontend. Deployed live on Vercel.',
-    codeSnippetPreview: {
-      filename: 'MapCanvasViewport.tsx',
-      language: 'typescript',
-      code: `// High-performance Pixi.js WebGL viewport rendering 500+ interactive nodes
-export const MapCanvasViewport = ({ mapNodes, onSelectNode }: ViewportProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const pixiApp = usePixiRenderer(containerRef);
-
-  useEffect(() => {
-    if (!pixiApp) return;
-    const stage = pixiApp.stage;
-    stage.removeChildren();
-
-    mapNodes.forEach(node => {
-      const sprite = createInteractiveNodeSprite(node, () => onSelectNode(node.id));
-      stage.addChild(sprite);
-    });
-  }, [mapNodes, pixiApp]);
-
-  return <div ref={containerRef} className="w-full h-[650px] relative overflow-hidden" />;
-};`
-    },
-    techStack: [
-      { name: 'React 19 & Vite', category: 'frontend', why: 'Blazingly fast HMR and optimized component lifecycle.' },
-      { name: 'Pixi.js (WebGL)', category: 'frontend', why: 'GPU batch rendering for hundreds of interactive nodes at 60 FPS.' },
-      { name: 'Node.js & TypeScript', category: 'backend', why: 'Type-safe domain logic and high I/O throughput.' },
-      { name: 'PostgreSQL & Prisma', category: 'database', why: 'Relational map versions, spatial coordinates, and transactional rollouts.' },
-      { name: 'Redis', category: 'backend', why: 'Distributed locks to eliminate session race conditions.' }
-    ],
-    keyChallenges: [
-      {
-        title: 'DOM Bottlenecks When Rendering Large Spatial Graphs',
-        problem: 'Rendering hundreds of interactive SVG nodes caused frame rates to drop below 20 FPS during pan/zoom.',
-        solution: 'Migrated map canvas to Pixi.js WebGL, rendering nodes directly on the GPU.',
-        engineeringTakeaway: 'Offload high-volume visual graphics to GPU canvases while keeping metadata in React state.'
-      }
-    ],
-    metrics: [
-      { label: 'Canvas Rendering', value: '60 FPS', description: 'Smooth GPU-accelerated map exploration' },
-      { label: 'API Latency', value: '<75ms', description: 'Cached with Redis key-value store' },
-      { label: 'Live Deployed', value: 'Vercel Preview', description: 'Production-ready admin dashboard' }
-    ],
-    keyTakeaways: [
-      'Live deployed on Vercel with automated continuous preview builds',
-      'Configured role-based admin controls and live theme switching',
-      'Eliminated game state race conditions via Redis atomic locks'
-    ],
-    interviewQnA: [
-      {
-        question: 'Why did you choose Pixi.js over standard SVG for the map editor?',
-        answer: 'SVGs add heavy nodes to the browser DOM tree, causing layout re-calculations on every pan and zoom. Pixi.js utilizes WebGL to batch-draw sprites directly on the GPU framebuffer, maintaining a silky 60 FPS regardless of node count.'
-      }
-    ]
   }
 ];
 
@@ -357,13 +290,13 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     ]
   },
   {
-    title: 'Frontend & Interactive Canvas',
+    title: 'Frontend & Modern Web UI',
     iconName: 'Layout',
     skills: [
-      { name: 'React & Vite', level: 'Advanced', context: 'Modern SPAs, fast HMR, optimized production bundles' },
-      { name: 'Pixi.js (2D WebGL)', level: 'Advanced', context: 'GPU-accelerated canvas rendering, interactive node maps' },
-      { name: 'Tailwind CSS', level: 'Advanced', context: 'Modern responsive layouts, design token customization' },
-      { name: '@xyflow/react', level: 'Proficient', context: 'Interactive node graph editors, workflow canvases' },
+      { name: 'React 19 & Vite', level: 'Advanced', context: 'Modern SPAs, fast HMR, optimized production bundles' },
+      { name: 'State Management', level: 'Advanced', context: 'Redux Toolkit, Context API, custom hooks' },
+      { name: 'Tailwind CSS', level: 'Advanced', context: 'Modern responsive layouts, mobile-first design tokens' },
+      { name: 'Component Systems', level: 'Advanced', context: 'Accessible, modular, reusable UI components' },
       { name: 'TanStack Table v8', level: 'Proficient', context: 'Headless data virtualization and complex data grids' }
     ]
   },
@@ -392,18 +325,18 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
 export const WORK_EXPERIENCE: ExperienceItem[] = [
   {
     company: 'Oodles Technologies',
-    role: 'Software Engineer (Full Stack)',
-    period: '2024 - Present',
+    role: 'Core Software Engineer (Backend & Frontend)',
+    period: 'July 2026 - Present',
     location: 'Gurugram, India',
     workType: 'Full-time',
-    description: 'Core software engineer developing high-scale backend services, gaming platforms, and interactive canvas admin systems.',
+    description: 'Core software engineer building scalable backend services, web automation workflows, and high-performance React web interfaces.',
     achievements: [
-      'Architected and implemented core backend services for Safari World Hunt, managing map layouts, simulation tests, and live releases using Node.js, Prisma, and PostgreSQL.',
-      'Built a high-performance interactive map editing studio using React 19, Pixi.js (WebGL), and Redux Toolkit, achieving 60 FPS graphics rendering.',
-      'Implemented distributed caching and rate-limiting using Redis and BullMQ, reducing average API response times to under 80ms.',
-      'Developed industrial IoT telemetry ingestion pipelines with TimescaleDB continuous aggregates and HashiCorp Vault cryptographic security.'
+      'Architected and implemented modular RESTful backend services and database models using Node.js, TypeScript, Express, and MongoDB/PostgreSQL.',
+      'Engineered responsive web frontends and internal tooling dashboards with React 19, Redux Toolkit, and Tailwind CSS, ensuring sub-second load times and fluid UX.',
+      'Built automated data collection and background scheduling pipelines using Puppeteer and Redis, automating recurring web synchronization and saving 12+ hours of manual effort per week.',
+      'Optimized database queries and implemented distributed Redis caching, maintaining sub-80ms API response latency with strict role-based access control (RBAC).'
     ],
-    techUsed: ['Node.js', 'TypeScript', 'React 19', 'Pixi.js', 'PostgreSQL', 'Prisma', 'Redis', 'NestJS', 'Docker', 'AWS S3']
+    techUsed: ['Node.js', 'TypeScript', 'React 19', 'Express.js', 'MongoDB', 'PostgreSQL', 'Redis', 'Puppeteer', 'Tailwind CSS', 'Docker', 'Git']
   }
 ];
 

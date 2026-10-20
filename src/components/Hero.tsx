@@ -10,7 +10,11 @@ import {
   Layers, 
   ShieldCheck, 
   ChevronDown,
-  Download
+  Download,
+  Globe,
+  Zap,
+  Sparkles,
+  Bot
 } from 'lucide-react';
 
 export const Hero: React.FC = () => {
@@ -38,9 +42,9 @@ export const Hero: React.FC = () => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F45B8D] opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#F45B8D]"></span>
             </span>
-            <span className="font-bold text-[#24151D]">Software Engineer at Oodles Technologies</span>
+            <span className="font-bold text-[#24151D]">Core Software Engineer at Oodles</span>
             <span className="text-[#FBCFE8]">•</span>
-            <span className="text-[#E83E76] font-bold">Full Stack / Backend / Frontend</span>
+            <span className="text-[#E83E76] font-bold">Backend & Frontend (Full Stack)</span>
           </div>
 
           {/* Main Headline (Dark text: #24151D with Bright pink: #F45B8D gradient) */}
@@ -53,36 +57,34 @@ export const Hero: React.FC = () => {
 
           {/* Value Proposition (Muted gray: #6B5561 with Bright pink: #F45B8D highlights) */}
           <p className="text-lg sm:text-xl text-[#6B5561] max-w-3xl mx-auto leading-relaxed mb-9 font-medium">
-            Building high-throughput <span className="text-[#E83E76] font-bold bg-[#FFE4EC] px-2 py-0.5 rounded-lg border border-[#FBCFE8]">Node.js/TypeScript backends</span>, 
-            GPU-accelerated <span className="text-[#E83E76] font-bold bg-[#FFE4EC] px-2 py-0.5 rounded-lg border border-[#FBCFE8]">React 19 & Pixi.js (WebGL)</span> canvas interfaces, 
-            and scalable telemetry systems with <span className="text-[#E83E76] font-bold bg-[#FFE4EC] px-2 py-0.5 rounded-lg border border-[#FBCFE8]">TimescaleDB & Redis</span>.
+            I craft dependable web platforms where <span className="text-[#E83E76] font-bold bg-[#FFE4EC] px-2 py-0.5 rounded-lg border border-[#FBCFE8]">scalable backend architecture</span> seamlessly connects with <span className="text-[#E83E76] font-bold bg-[#FFE4EC] px-2 py-0.5 rounded-lg border border-[#FBCFE8]">clean, human-centric user experiences</span>. Passionate about <span className="text-[#E83E76] font-bold bg-[#FFE4EC] px-2 py-0.5 rounded-lg border border-[#FBCFE8]">AI-accelerated developer velocity</span>, rock-solid security, and writing responsible code that moves businesses forward.
           </p>
 
           {/* Pillars Cards (White cards: #FFFFFF, borders: #FBCFE8, Rose pink icons: #F9A8C4) */}
           <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-11 text-xs sm:text-sm">
             <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#FBCFE8] text-[#24151D] shadow-xs">
               <div className="p-1 rounded-md bg-[#FFE4EC] text-[#F45B8D]">
-                <Server className="w-4 h-4" />
+                <Globe className="w-4 h-4" />
               </div>
-              <span className="font-bold">Distributed Backend & APIs</span>
+              <span className="font-bold">Full-Stack MERN & TypeScript</span>
             </div>
             <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#FBCFE8] text-[#24151D] shadow-xs">
               <div className="p-1 rounded-md bg-[#FFE4EC] text-[#F45B8D]">
-                <Layers className="w-4 h-4" />
+                <Zap className="w-4 h-4" />
               </div>
-              <span className="font-bold">WebGL & Canvas 60 FPS</span>
+              <span className="font-bold">Sub-80ms High-Throughput APIs</span>
             </div>
             <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#FBCFE8] text-[#24151D] shadow-xs">
               <div className="p-1 rounded-md bg-[#FFE4EC] text-[#F45B8D]">
-                <Cpu className="w-4 h-4" />
+                <Bot className="w-4 h-4" />
               </div>
-              <span className="font-bold">TimescaleDB & IoT Telemetry</span>
+              <span className="font-bold">Smart Web Automation & Sync</span>
             </div>
             <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#FBCFE8] text-[#24151D] shadow-xs">
               <div className="p-1 rounded-md bg-[#FFE4EC] text-[#F45B8D]">
-                <ShieldCheck className="w-4 h-4" />
+                <Sparkles className="w-4 h-4" />
               </div>
-              <span className="font-bold">Vault Cryptographic Security</span>
+              <span className="font-bold">AI Velocity & Code Rigor</span>
             </div>
           </div>
 

@@ -209,7 +209,7 @@ export const ContactSection: React.FC = () => {
                   <textarea
                     rows={4}
                     required
-                    placeholder="Hi Shivani, we were impressed by your backend and WebGL work and would love to schedule a screening interview..."
+                    placeholder="Hi Shivani, we were impressed by your full-stack engineering and web automation work and would love to schedule a screening interview..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full px-4 py-2.5 rounded-xl bg-[#FFF1F4] border border-[#FBCFE8] text-sm text-[#24151D] placeholder-[#6B5561]/60 focus:outline-none focus:bg-white focus:border-[#F45B8D] transition-colors resize-none font-medium"

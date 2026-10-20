@@ -5,35 +5,35 @@ export const WhatIDoSection: React.FC = () => {
   const capabilities = [
     {
       title: 'Full-Stack Web Applications',
-      short: 'From Database to Polished UI',
-      desc: 'Architecting scalable end-to-end applications using the MERN stack (MongoDB, Express, React, Node) and TypeScript with secure authentication and multi-tenant data isolation.',
+      short: 'From Idea to Live Production Product',
+      desc: 'I build complete web platforms where intuitive user interfaces connect seamlessly to robust backends. Every feature is crafted with clean architecture, secure logins, and scalable databases.',
       icon: <Globe className="w-6 h-6 text-[#F45B8D]" />,
       badge: 'MERN & TypeScript',
-      highlight: 'Multivendor eCommerce & EMS'
+      highlight: 'Production-Grade Quality'
     },
     {
-      title: 'High-Throughput Backend & APIs',
-      short: 'Sub-80ms Latency & Distributed Locks',
-      desc: 'Building clean RESTful endpoints, rate-limited public APIs, and background job queues with Redis and PostgreSQL transactions to prevent race conditions and overselling.',
+      title: 'High-Speed APIs & Databases',
+      short: 'Instant Loading & Rock-Solid Reliability',
+      desc: 'I ensure servers never crash, never double-bill, and respond in under 80ms. Using smart database indexing, transactions, and Redis caching, your users experience instant responses without waiting.',
       icon: <Zap className="w-6 h-6 text-[#E83E76]" />,
       badge: 'Node.js & Redis',
       highlight: '<80ms Response Times'
     },
     {
-      title: 'Interactive 60 FPS Frontends',
-      short: 'GPU-Accelerated WebGL & Canvas',
-      desc: 'Creating fluid, responsive user interfaces using React 19, Pixi.js (WebGL), and Tailwind CSS that smoothly render hundreds of interactive graphical nodes without DOM lag.',
+      title: 'Modern Responsive Interfaces',
+      short: 'Clean Screens Users Genuinely Love',
+      desc: 'I craft accessible, elegant frontend interfaces using React 19 and Tailwind CSS that look sharp on mobile, tablet, and desktop. Fast navigation, instant visual feedback, and zero clunkiness.',
       icon: <Palette className="w-6 h-6 text-[#F45B8D]" />,
-      badge: 'React 19 & Pixi.js',
-      highlight: '60 FPS Smooth Canvas'
+      badge: 'React 19 & Tailwind',
+      highlight: '100% Mobile & Desktop Fluid'
     },
     {
-      title: 'Web Automation & Data Scraping',
-      short: 'Stealth Browser Crawlers & Schedulers',
-      desc: 'Developing resilient background scrapers using Puppeteer stealth fingerprinting, automated cron scheduling, and cursor-based pagination to process thousands of listings.',
+      title: 'Smart Automation & Data Sync',
+      short: 'Saving 12+ Hours of Manual Work Weekly',
+      desc: 'I build automated background bots that collect, structure, and sync live web data 24/7 without manual supervision — replacing tedious copy-pasting with reliable, hands-off pipelines.',
       icon: <Bot className="w-6 h-6 text-[#E83E76]" />,
       badge: 'Puppeteer & Cron',
-      highlight: '15,000+ Indexed Records'
+      highlight: '15,000+ Records Auto-Synced'
     }
   ];
 
