@@ -1,29 +1,31 @@
 import React from 'react';
 import { PERSONAL_INFO } from '../data/portfolioData';
-import { Terminal, Heart } from 'lucide-react';
+import { Terminal } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="py-12 border-t border-slate-900 bg-slate-950 text-slate-400 text-xs sm:text-sm">
+    <footer className="py-12 border-t border-slate-200/80 bg-white text-slate-500 text-xs sm:text-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         
-        <div className="flex items-center gap-2">
-          <Terminal className="w-4 h-4 text-cyan-400" />
-          <span className="font-semibold text-slate-200">{PERSONAL_INFO.name}</span>
-          <span className="text-slate-600">•</span>
+        <div className="flex items-center gap-2.5">
+          <div className="w-6 h-6 rounded-lg bg-slate-900 flex items-center justify-center text-white">
+            <Terminal className="w-3.5 h-3.5 text-indigo-400" />
+          </div>
+          <span className="font-semibold text-slate-900">{PERSONAL_INFO.name}</span>
+          <span className="text-slate-300">•</span>
           <span>Full Stack Software Engineer</span>
         </div>
 
         <div className="flex items-center gap-6">
-          <a href="#projects" className="hover:text-cyan-400 transition-colors">Projects</a>
-          <a href="#skills" className="hover:text-cyan-400 transition-colors">Skills</a>
-          <a href="#experience" className="hover:text-cyan-400 transition-colors">Experience</a>
-          <a href={PERSONAL_INFO.github} target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">GitHub</a>
-          <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">LinkedIn</a>
+          <a href="#projects" className="hover:text-indigo-600 transition-colors">Projects</a>
+          <a href="#skills" className="hover:text-indigo-600 transition-colors">Skills</a>
+          <a href="#experience" className="hover:text-indigo-600 transition-colors">Experience</a>
+          <a href={PERSONAL_INFO.github} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition-colors">GitHub</a>
+          <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-indigo-600 transition-colors">LinkedIn</a>
         </div>
 
-        <div className="text-slate-500 text-xs">
-          © {new Date().getFullYear()} Shivani Kapoor. Built for technical interviews.
+        <div className="text-slate-400 text-xs">
+          © {new Date().getFullYear()} Shivani Kapoor. All rights reserved.
         </div>
 
       </div>

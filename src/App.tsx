@@ -15,7 +15,7 @@ export function App() {
   const [activeProjectModal, setActiveProjectModal] = useState<ProjectCaseStudy | null>(null);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200">
+    <div className="min-h-screen bg-[#fafafc] text-slate-800 flex flex-col selection:bg-indigo-500/20 selection:text-indigo-800">
       {/* Top Fixed Header */}
       <Navbar />
 
